@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-29T06:06:28.339Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0" etag="KJhJKNvkl9w-RvyqCDt3" version="23.0.2" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2024-01-29T06:07:06.876Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0" etag="1bxE66pZ9bA0gjavm7vK" version="23.0.2" type="github" pages="2">
   <diagram name="ERD" id="VXVqVvbSLFKc98BMj8N4">
     <mxGraphModel dx="1708" dy="1391" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -201,8 +201,11 @@
         <mxCell id="VKuUm9pk9I5lDP7ehWcS-5" value="제품색상" style="ellipse;shape=doubleEllipse;margin=3;whiteSpace=wrap;html=1;align=center;fontSize=16;" vertex="1" parent="1">
           <mxGeometry x="-300" y="320" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="pSygysDqsmpUmuMcyr_T-3" value="Multivalue" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=16;fontColor=default;startSize=0;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="-430" y="310" width="110" height="60" as="geometry" />
+        <mxCell id="b7PekmZ-Q1O7V8gQwxxi-1" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Helvetica;fontSize=16;fontColor=default;startSize=0;endSize=8;" edge="1" parent="1" source="pSygysDqsmpUmuMcyr_T-3" target="VKuUm9pk9I5lDP7ehWcS-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pSygysDqsmpUmuMcyr_T-3" value="Multivalued" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=16;fontColor=default;startSize=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-440" y="295" width="110" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
