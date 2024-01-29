@@ -1057,8 +1057,6 @@ VALUES (7207, 'TEST_USER7', 'LECTURER', 7201, '2016-10-28', 2300, NULL, 80);
 INSERT INTO EXAM_EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
 VALUES (7208, 'TEST_USER8', 'STUDENT', 7201, '2018-02-21', 1200, NULL, 80); 
 
-COMMIT;
-
 -- EXAM_EMP에 속한 사원 중 50번 부서에서 근무하는 사원들의 평균 급여보다 많은 급여를
 -- 받고있는 사원들을 70번 부서로 옮기는 SQL문 작성
 UPDATE EXAM_EMP 
@@ -1068,14 +1066,227 @@ WHERE SAL > (SELECT AVG(SAL) FROM EXAM_EMP WHERE DEPTNO = 50);
 -- EXAM_EMP에 속한 사원 중 60번 부서의 사원 중에서 입사일이 가장 빠른 사원보다 늦게
 -- 입사한 사원의 급여를 10% 인상하고 80번 부서로 옮기는 SQL문 작성
 UPDATE EXAM_EMP
-SET SAL = SAL + SAL * 0.1, DEPTNO = 80
+SET SAL = SAL * 1.1, DEPTNO = 80
 WHERE HIREDATE > (SELECT MIN(HIREDATE) FROM EXAM_EMP WHERE DEPTNO = 60);
 
 -- EXAM_EMP에 속한 사원 중, 급여 등급이 5인 사원을 삭제하는 SQL문 작성
-DELETE EXAM_EMP
-WHERE EMPNO IN (
-	SELECT EMPNO FROM EXAM_EMP ee 
-	JOIN SALGRADE s ON ee.SAL BETWEEN s.LOSAL AND s.HISAL 
-	AND s.GRADE = 3);
+DELETE exam_emp
+WHERE empno IN (
+	SELECT empno FROM exam_emp, SALGRADE 
+	WHERE sal BETWEEN losal AND hisal AND grade = 5);
 	
 COMMIT;
+
+
+--5일차
+
+
+-- Transsaction
+-- 하나의 작업 또는 밀접하게 연관되어 있는 작업 수행을 위해 나눌 수 없는 최소 작업 단위
+-- 최종반영 (Commit) / 모두 취소 (Rollback)
+
+-- DBeaver 설정에서 커밋 모드 변경 가능
+-- 기본 : Auto commit 상태
+
+INSERT INTO DEPT_TEMP
+VALUES (55, 'NETWORK', 'SEOUL');
+
+UPDATE DEPT_TEMP 
+SET LOC = 'BUSAN'
+WHERE DEPTNO = 55;
+
+COMMIT;
+ROLLBACK; - COMMIT 전 실행 (COMMIT 취소 X)
+
+SELECT * FROM DEPT_TEMP dt; 
+
+DELETE FROM DEPT_TEMP dt
+WHERE deptno = 55;
+
+UPDATE DEPT_TEMP 
+SET DNAME = 'WEB'
+WHERE DEPTNO = 10;
+
+-- LOCK : 한 세션에서 트랜잭션 작업이 완료되지 않으면 다른 세션에서 작업을 처리할 수 없는 상태
+--        (DML - insert, update, delete)
+
+-- 테이블 정의, 사용자 정의, 권한 부여(취소)
+
+-- SQL - 1. DDL    2. DML - select, insert, update, delete    3. DCL (권한부여)
+
+-- 데이터 정의어 (DDL)
+-- 테이블 정의, 사용자 정의, 권한 부여(취소)
+-- CREATE
+
+-- 1. 테이블 생성
+-- CREATE TABLE 테이블명 (
+-- 필드명 필드타입(크기) 제약조건, 
+-- )
+
+-- 열 이름 규칙
+-- 문자로 시작 / 30byte 이하로 작성 / 한 테이블 안 열 이름 중복 불가
+-- 열 이름은 문자, 0-9, 특수문자($, #, _) 사용 가능
+-- SQL 키워드는 열 이름으로 사용 불가 (order, group, select,...)
+
+-- 문자
+-- 1) CHAR  2) VARCHAR2  3) NCHAR  4) NVARCHAR2  5) CLOB  6) NCLOB  7) LONG
+-- CHAR or VARCHAR : 열의 너비가 고정값인지 가변인지
+
+-- CHAR(10) : 'hong' - 10자리 다 사용
+-- VARCHAR2(10) : 'hong' - 입력된 글자에 따라 가변
+
+-- VACHAR2, CHAR 가 한글, 영문 입력 시 사용하는 바이트 수가 다름
+-- NCHAR, NVARCHAR 사용하는 바이트 수 통일
+
+-- NCHAR(10) : 'hong' - 유니코드 문자열 타입이고, 고정 (문자 1개당 1byte - 한글, 영어 상관 X)
+-- NVARCHAR2(10) : 'hong' - 유니코드 문자열 타입이고, 가변 (문자 1개당 1byte - 한글, 영어 상관 X)
+
+-- CLOB : 문자열 데이터를 외부 파일로 저장
+--        엄청 많은 텍스트 데이터 입력 시 사용
+
+-- LONG : 2GB
+
+-- 숫자
+-- NUMBER (전체자릿수, 소수점자릿수)
+-- BINARY_FLOAT, BINARY_DOUBLE
+
+-- 날짜
+-- DATE, TIMESTAMP
+
+CREATE TABLE EMP_DDL(
+	EMPNO NUMBER(4),
+	ENAME VARCHAR2(10),
+	JOB VARCHAR2(9),
+	MGR NUMBER(4),
+	HIREDATE DATE,
+	SAL NUMBER(7,2),
+	COMM NUMBER(7,2),
+	DEPTNO NUMBER(2)
+);
+
+SELECT * FROM emp_ddl;
+
+-- 기본 테이블 열 구조와 데이터 복사해서 새 테이블 생성
+CREATE TABLE exam_dept AS SELECT * FROM emp;
+
+-- 기본 테이블 열 구조만 복사해서 새 테이블 생성
+CREATE TABLE emp_temp2 AS SELECT * FROM emp WHERE 1<>1;
+
+-- DDL : CREAT, ALTER
+-- 2. 테이블 변경
+-- 1) 열 추가 (ADD)
+ALTER TABLE 테이블명 ADD 추가할열이름 데이터타입(10)
+
+-- emp_ddl 에 새로운 컬럼 추가 HP (010-1234-4567)
+ALTER TABLE EMP_DDL ADD HP VARCHAR2(15);
+
+SELECT * FROM EMP_DDL ed;
+
+-- 2) 열 이름 변경 (RENAME)
+ALTER TABLE 테이블명 RENAME COLUMN 기존이름 TO 변경이름
+
+-- HP → MOBILE
+ALTER TABLE EMP_DDL RENAME COLUMN HP TO MOBILE;
+
+-- 3) 열 자료형 변경 (MODIFY)
+ALTER TABLE 테이블명 MODIFY 열이름 데이터타입(20)
+
+-- EMPNO NUMBER(5)
+ALTER TABLE EMP_DDL MODIFY EMPNO NUMBER(5);
+
+-- SQLplus : scott 접속
+desc emp_ddl - 열 구조 확인
+
+-- 4) 열 제거
+ALTER TABLE 테이블명 DROP COLUMN 열이름;
+
+ALTER TABLE EMP_DDL DROP COLUMN MOBILE;
+
+-- 테이블 이름 변경
+RENAME 변경전 테이블명 TO 변경할 테이블명
+
+-- EMP_DDL → EMP_ALTER
+RENAME EMP_DDL TO EMP_ALTER;
+
+SELECT * FROM EMP_ALTER;
+
+-- CREATE, ALTER, DROP
+-- 3. 테이블 삭제 : DROP
+DROP TABLE 테이블명;
+
+DROP TABLE EMP_ALTER;
+
+-- VIEW : 가상테이블
+CREATE VIEW 뷰이름 AS (SELECT * FROM 원본 테이블명)
+-- 편리성, 보안성
+
+-- *Error : 권한이 불충분합니다
+-- 뷰는 권한을 가진 사용자만 생성할 수 있음
+CREATE VIEW VM_EMP20 AS (SELECT * FROM EMP WHERE DEPTNO = 20);
+
+SELECT * FROM vm_emp20;
+
+INSERT INTO VM_EMP20
+VALUES (8888, 'HONG', 'ANALYST', 7902, SYSDATE, 2500, NULL, 20);
+
+SELECT * FROM EMP e;
+
+SELECT *
+FROM USER_UPDATABLE_COLUMNS
+WHERE TABLE_NAME = 'VM_EMP20';
+
+-- VIEW 를 통해 읽기만 가능 (insert, update, delete 불가능)
+CREATE VIEW 뷰이름 AS (SELECT * FROM 원본 테이블명) WITH READ ONLY
+
+CREATE VIEW VM_EMP30 AS (SELECT * FROM EMP WHERE DEPTNO = 30) WITH READ ONLY;
+
+SELECT *
+FROM USER_UPDATABLE_COLUMNS
+WHERE TABLE_NAME = 'VM_EMP30';
+
+-- VIEW 삭제
+DROP VIEW VM_EMP20;
+DROP VIEW VM_EMP30;
+
+-- INDEX 생성, 삭제
+-- INDEX (색인, 목차) 
+-- 인덱스 : 기본키, 고유키일 때 자동으로 생성
+CREATE INDEX 인덱스명 ON 테이블명 (인덱스로 사용할 필드명)
+
+CREATE INDEX IDX_EMP_SAL ON EMP(SAL);
+
+SELECT * FROM USER_IND_COLUMNS;
+
+DROP INDEX IDX_EMP_SAL;
+
+-- 시퀀스 생성 / 삭제
+-- ORACLE 객체, 하나씩 증가하는 값이 필요할 때 주로 사용
+-- 다른 DB의 AUTO_INCREMENT 와 동일한 역할
+CREATE SEQUENCE 시퀀스명
+INCREMENT BY 증감값 START WITH 시작값 MAXVALUE 최대값 MINVALUE 최소값
+NOCYCLE CACHE 숫자;
+
+-- 1 에서 시작 ~ 99999999...
+-- 1씩 증가하면서 숫자 생성
+CREATE SEQUENCE dept_seq;
+DROP SEQUENCE dept_seq;
+
+SELECT * FROM USER_SEQUENCES;
+
+CREATE TABLE dept_sequence AS SELECT * FROM dept WHERE 1<>1;
+
+CREATE SEQUENCE dept_seq
+INCREMENT BY 10 START WITH 10 MAXVALUE 90 MINVALUE 0
+NOCYCLE CACHE 2;
+
+-- 시퀀스 DEPT_SEQ.NEXTVAL exceeds MAXVALUE은 사례 - insert 시 자동으로 하나씩 증가
+INSERT INTO dept_sequence (deptno, dname, loc)
+VALUES (dept_seq.nextval, 'DATABASE', 'SEOUL');
+
+SELECT * FROM dept_sequence;
+
+ALTER SEQUENCE dept_seq INCREMENT BY 3 MAXVALUE 99 CYCLE;
+
+-- 마지막으로 생성된 시퀀스 확인
+SELECT dept_seq.currval FROM dual;
+

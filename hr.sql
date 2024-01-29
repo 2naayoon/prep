@@ -373,3 +373,19 @@ WHERE (SALARY, NVL(COMMISSION_PCT, 0)) IN (
 		SELECT DEPARTMENT_ID
 		FROM DEPARTMENTS d
 		WHERE d.LOCATION_ID = 1700));
+		
+
+-- 5일차
+	
+SELECT * FROM EMPLOYEES e WHERE FIRST_NAME = 'Jack'; - Execution plan : FULL scan
+
+-- 테이블 생성 - 구조, 데이터 복사
+CREATE TABLE idx_employees AS SELECT DISTINCT first_name, last_name, hire_date FROM employees;
+
+-- INDEX 생성
+CREATE INDEX idx_name ON idx_employees(first_name);
+
+-- INDEX 사용해서 조회 → 범위 스캔 (Range scan)ㄹ
+SELECT * FROM IDX_EMPLOYEES ie WHERE FIRST_NAME = 'Jack'; - Execution plan : RANGE scan
+
+
