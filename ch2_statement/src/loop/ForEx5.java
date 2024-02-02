@@ -3,6 +3,8 @@ package loop;
 public class ForEx5 {
 
   public static void main(String[] args) {
+    // 조건 오류 입력 시 터미널 무한루프 발생 → ctrl + c
+
     // *
     // **
     // ***
