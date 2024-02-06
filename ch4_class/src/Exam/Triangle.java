@@ -13,4 +13,10 @@ public class Triangle {
     this.baseLine = baseLine;
     this.height = height;
   }
+
+  // 메소드
+  // 삼각형의 넓이 getArea() = 밑변 * 높이 / 2
+  double getArea() {
+    return baseLine * (double) height / 2;
+  }
 }

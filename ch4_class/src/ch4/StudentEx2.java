@@ -33,5 +33,12 @@ public class StudentEx2 {
 
     Student2 obj3 = new Student2("20245812", "김진수", "경기도 수원시");
     System.out.println(obj3);
+
+    obj2.setId("20247890");
+    obj2.setName("박지성");
+    obj2.setAddr("경기도 성남시");
+    obj2.setHp("010-7890-1234");
+
+    System.out.println(obj2);
   }
 }

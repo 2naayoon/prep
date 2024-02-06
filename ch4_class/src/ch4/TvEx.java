@@ -15,17 +15,27 @@ package ch4;
 public class TvEx {
 
   public static void main(String[] args) {
-    Tv tv = new Tv(); // new Tv() 객체를 만듦 → 실제 사용
-    System.out.println(tv.color); //null
-    System.out.println(tv.channel); //0
-    System.out.println(tv.power); //false
+    Tv tv = new Tv("black", 3, true); // new Tv() 객체를 만듦 → 실제 사용
+    // System.out.println(tv.color); //null
+    // System.out.println(tv.channel); //0
+    // System.out.println(tv.power); //false
 
-    tv.color = "black";
-    tv.channel = 3;
-    tv.power = true; // true = on
+    // tv.color = "black";
+    // tv.channel = 3;
+    // tv.power = true; // true = on
 
     tv.channelUp();
-    System.out.println("현재 채널 " + tv.channel);
-    //채널 번호 직접 입력
+
+    // *Error : The field Tv.channel is not visible
+    // void 는 호출만 하면 끝 return을 해주지 않음
+    // System.out.println("현재 채널 " + tv.channel);
+
+    System.out.println("현재 채널 " + tv.getChannel());
+
+    tv.setChannel(8); // return 값이 없으니 getChannel 사용
+    System.out.println("현재 채널 " + tv.getChannel());
+
+    // 전원 끄기
+    tv.setPower(false);
   }
 }

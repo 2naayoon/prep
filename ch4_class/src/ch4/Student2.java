@@ -35,7 +35,7 @@ public class Student2 {
   //    여러개를 만들 수 있지만 ()안은 달라야함
   Student2() {}
 
-  // source 자동생성
+  // source 자동생성 : Source Action : Generate Constructors
   public Student2(String id, String name, String addr) {
     this.id = id;
     this.name = name;
@@ -50,6 +50,7 @@ public class Student2 {
     this.hp = hp;
   }
 
+  // Source Action : Generate tostring
   @Override
   public String toString() {
     return (
@@ -63,5 +64,37 @@ public class Student2 {
       hp +
       "]"
     );
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getAddr() {
+    return addr;
+  }
+
+  public void setAddr(String addr) {
+    this.addr = addr;
+  }
+
+  public String getHp() {
+    return hp;
+  }
+
+  public void setHp(String hp) {
+    this.hp = hp;
   }
 }
