@@ -1,7 +1,7 @@
 package operator;
 
-/*  단항 연산자 : 부호 - 양수, 음수, 증감연산자(++, --), 논리부정연산자 : ! (true → false, false → true)
- *
+/*  단항 연산자 : 부호 - 양수, 음수, 증감연산자(++, --)
+ *  논리부정연산자 : ! (true → false, false → true)
  */
 
 public class DenyLogicEx1 {
