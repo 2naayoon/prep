@@ -12,5 +12,5 @@ public abstract class OddDetector {
     return n;
   }
 
-  abstract boolean isOdd();
+  public abstract boolean isOdd();
 }

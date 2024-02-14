@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public abstract class Converter {
 
-  protected abstract double convert(double src);
+  protected abstract double convert(double src); // 추상 메소드
 
-  protected abstract String getSrcString();
+  protected abstract String getSrcString(); // 추상 메소드
 
-  protected abstract String getDestString();
+  protected abstract String getDestString(); // 추상 메소드
 
-  protected double ratio;
+  protected double ratio; // 비율
 
   public void run() {
     Scanner scanner = new Scanner(System.in);

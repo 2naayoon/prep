@@ -7,7 +7,10 @@ public class Odd extends OddDetector {
   }
 
   @Override
-  boolean isOdd() {
+  public boolean isOdd() {
+    if (getN() % 2 == 1) {
+      return true;
+    }
     return false;
   }
 }
