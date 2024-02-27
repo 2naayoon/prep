@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        날짜 / 시간
+        1) date / datetime-local
+
+        숫자
+        1) number
+
+     -->
+    <form action="" method="get">
+      <div>
+        <label for="datemax">Enter a date before 1980-01-01</label>
+        <input type="date" name="datemax" id="datemax" max="1979-12-31" />
+      </div>
+      <div>
+        <label for="datemax">Enter a date after 2000-01-01</label>
+        <input type="date" name="datemax" id="datemin" min="2000-01-02" />
+      </div>
+      <div>
+        <label for="quantity">quantity (between 1 and 5)</label>
+        <input type="number" name="quantity" id="quantity" min="1" max="5" />
+      </div>
+      <div>
+        <input type="datetime" name="" id="" />
+      </div>
+      <div>
+        <input type="datetime-local" name="" id="" />
+      </div>
+      <div>
+        <input type="search" name="search" id="search" />
+      </div>
+      <div>
+        <!-- 
+            email 을 입력했는데 규칙에 맞지 않는 경우 알려줌
+            규칙이 엄격하지는 않아서 완벽하게 처리해 주지는 못함
+            @, @ 이후 문자 하나 정도만 체크
+         -->
+        <input type="email" name="email" id="email" />
+      </div>
+      <div>
+        <label for="tel">전화번호</label>
+        <!-- [0-9]{3}-[0-9]{4}-[0-9]{4} : 숫자 3자리 - 숫자 4자리 - 숫자 4자리 -->
+        <input type="tel" name="tel" id="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" />
+      </div>
+      <div>
+        <label for="">이름</label>
+        <!-- [A-Za-z]{3} : 영어 3자리 -->
+        <input type="text" name="name" id="name" pattern="[A-Za-z]{3}" />
+      </div>
+      <div>
+        <input type="submit" value="전송" />
+      </div>
+    </form>
+  </body>
+</html>
