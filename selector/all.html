@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        color: blue;
+      }
+      /* ul 태그 안에 모든 자손 요소 */
+      ul * {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      1. selector(선택자)
+      1) class : 전역 속성인 클래스를 이용하기 ("." 으로 시작)
+      2) id : 전역 속성인 아이디를 이용하기
+      3) tag : 태그 이용 (현재 페이지 내의 동일한 태그에 모두 적용됨)
+      4) * : 전체 선택자
+     -->
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h1>title</h1>
+    <ul>
+      <li>List Item1</li>
+      <li>List Item2</li>
+      <li>List Item3</li>
+    </ul>
+  </body>
+</html>
