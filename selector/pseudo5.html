@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1::before {
+        content: "before ";
+        color: red;
+      }
+      h1::after {
+        content: "after ";
+        color: blue;
+      }
+      h3::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        display: inline-block;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      1. selector(선택자)
+      1) class : 전역 속성인 클래스를 이용하기 ("." 으로 시작)
+      2) id : 전역 속성인 아이디를 이용하기
+      3) tag : 태그 이용 (현재 페이지 내의 동일한 태그에 모두 적용됨)
+      4) * : 전체 선택자
+      5) 자손(하위) : 자식 + 손자   부모선택자 자식선택자
+      6) 자식 : 부모선택자 > 자식선택자
+      7) 형제 : + or ~   - 선택자 + 선택자 (바로 뒤따라 오는 선택자 요소만)
+                         - 선택자 ~ 선택자 (뒤따라 오는 선택자 요소)
+      8) 그룹 : 다양한 선택자 요소에 동일한 디자인을 적용
+      9) 속성 : [속성명], [속성명="value"], [속성명~="value"], [속성명|="value"], [속성명^="value"]
+                [속성명$="value"], [속성명*="value"]
+      10) pseudo class : 
+            a 태그
+            - link : 밑줄
+            - visited : 자주색
+            - active : 빨강색
+
+            - hover : 요소에 마우스를 올리는 행동
+            - focus : 요소 중 포커스를 받게 되면 사용 가능
+
+            - disabled
+            - checked (radio, checkbox)
+            - selected (select)  
+      11) pseudo class : 구조
+            - first-child
+            - last-child
+            - nth-child
+      12) pseudo element (가상요소)
+            - ::before
+            - ::after
+    -->
+    <h1>가상요소</h1>
+    <h3>가상요소 선택자</h3>
+    <ul>
+      <li>List1</li>
+      <li>List2</li>
+      <li>List3</li>
+    </ul>
+  </body>
+</html>

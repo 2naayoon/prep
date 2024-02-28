@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      table {
+        border-collapse: collapse;
+        width: 60%;
+      }
+
+      /* 행에 마우스 올렸을 때 배경색 변경 */
+      /* tr:hover {
+        background-color: pink;
+      } */
+
+      /* 짝수행에 마우스 올렸을 때 배경색 변경 */
+      tr:hover:nth-child(2n) {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>제목 1</th>
+        <th>제목 2</th>
+        <th>제목 3</th>
+      </tr>
+      <tr>
+        <td>컬럼 1</td>
+        <td>컬럼 2</td>
+        <td>컬럼 3</td>
+      </tr>
+      <tr>
+        <td>컬럼 1</td>
+        <td>컬럼 2</td>
+        <td>컬럼 3</td>
+      </tr>
+      <tr>
+        <td>컬럼 1</td>
+        <td>컬럼 2</td>
+        <td>컬럼 3</td>
+      </tr>
+    </table>
+  </body>
+</html>

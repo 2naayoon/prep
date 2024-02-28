@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* ul li:first-child {
+        text-decoration: underline;
+      }
+      ul li:last-child {
+        text-decoration: underline;
+      }
+      ul li:nth-child(3) {
+        text-decoration: underline;
+      } */
+
+      /* n 은 0부터 시작 */
+      /* ul li:nth-child(2n + 1) {
+        background-color: silver;
+      }
+      ul li:nth-child(2n) {
+        background-color: gold;
+      } */
+
+      ul li:nth-child(-n + 3) {
+        background-color: green;
+      }
+      ul li:nth-child(n + 4) {
+        background-color: cornflowerblue;
+      }
+      .fruits p:nth-child(2) {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      1. selector(선택자)
+      1) class : 전역 속성인 클래스를 이용하기 ("." 으로 시작)
+      2) id : 전역 속성인 아이디를 이용하기
+      3) tag : 태그 이용 (현재 페이지 내의 동일한 태그에 모두 적용됨)
+      4) * : 전체 선택자
+      5) 자손(하위) : 자식 + 손자   부모선택자 자식선택자
+      6) 자식 : 부모선택자 > 자식선택자
+      7) 형제 : + or ~   - 선택자 + 선택자 (바로 뒤따라 오는 선택자 요소만)
+                         - 선택자 ~ 선택자 (뒤따라 오는 선택자 요소)
+      8) 그룹 : 다양한 선택자 요소에 동일한 디자인을 적용
+      9) 속성 : [속성명], [속성명="value"], [속성명~="value"], [속성명|="value"], [속성명^="value"]
+                [속성명$="value"], [속성명*="value"]
+      10) pseudo class : 
+            a 태그
+            - link : 밑줄
+            - visited : 자주색
+            - active : 빨강색
+
+            - hover : 요소에 마우스를 올리는 행동
+            - focus : 요소 중 포커스를 받게 되면 사용 가능
+
+            - disabled
+            - checked (radio, checkbox)
+            - selected (select)
+      11) pseudo class : 구조
+            - first-child
+            - last-child
+            - nth-child
+    -->
+    <h1>가상 클래스</h1>
+    <ul>
+      <li>List Item1</li>
+      <li>List Item2</li>
+      <li>List Item3</li>
+      <li>List Item4</li>
+      <li>List Item5</li>
+    </ul>
+    <ul class="fruits">
+      <div>딸기</div>
+      <p>사과</p>
+      <p>오렌지</p>
+      <span>망고</span>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        font-size: 13px;
+      }
+      body {
+        font-size: 10px;
+      }
+      .box {
+        float: left;
+        margin-right: 20px;
+        background: blue;
+        color: #fff;
+        text-align: center;
+      }
+      .clearfix::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      .box_px {
+        width: 160px;
+        height: 160px;
+      }
+      /* 글자 크기 지정 안하면 브라우저 기본 크기 16px */
+      .box_em {
+        width: 10em;
+        height: 10em;
+      }
+      .box_rem {
+        width: 10rem;
+        height: 10rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        css단위
+        - 모니터 : px, em, %
+            px : 고정크기
+            % : 상대크기
+            em : em 단위가 쓰여진 곳의 폰트 사이즈 배수 (body 에서 지정)
+            rem : rem 단위가 쓰여진 곳의 폰트 사이즈 배수 (:root 에서 지정)
+            vw, vh (viewport width, viewport height)
+    -->
+    <h1>CSS 기본 문법</h1>
+    <h2>단위</h2>
+    <p>
+      <span>Lorem, ipsum</span> dolor sit amet consectetur adipisicing elit. A natus alias dolore corrupti minus accusamus. Harum, tempore earum
+      voluptate cumque, nulla animi repellat explicabo eveniet ducimus sequi unde debitis atque eius quam corporis exercitationem! Nemo facilis
+      maiores eligendi illo possimus accusantium alias corrupti, vero amet tempore expedita sit itaque totam!
+    </p>
+
+    <div class="wrapper clearfix">
+      <div class="box box_px">PX</div>
+      <div class="box box_em">EM</div>
+      <div class="box box_rem">REM</div>
+    </div>
+  </body>
+</html>
