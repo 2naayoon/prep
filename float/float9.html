@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 전체 요소에 box-sizing 설정 */
+      * {
+        box-sizing: border-box;
+      }
+      /* header 요소 : 배경색 #333, 안쪽여백 30, 가운데정렬, 글꼴크기 35, 글자색 흰색 */
+      header {
+        background-color: #333;
+        padding: 30px;
+        text-align: center;
+        font-size: 35px;
+        color: white;
+      }
+      /* nav 요소 : 높이 500px, 배경색 #ccc, 안쪽여백20 */
+      nav {
+        float: left;
+        width: 30%;
+        background-color: #ccc;
+        padding: 20px;
+        height: 500px;
+      }
+      nav li {
+        list-style-type: none;
+      }
+      /* article 요소 : 높이 500px, 배경색 #f1f1f1, 안쪽여백 20 */
+      article {
+        float: left;
+        width: 70%;
+        background-color: #f1f1f1;
+        padding: 20px;
+        height: 500px;
+      }
+      /* footer 요소 : 배경색 #777, 안쪽여백 10, 글자 가운데정렬, 흰색 */
+      footer {
+        background-color: #777;
+        padding: 10px;
+        text-align: center;
+        color: white;
+      }
+      .clearfix::after {
+        content: "";
+        clear: both;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2>Cities</h2>
+    </header>
+    <section class="clearfix">
+      <nav>
+        <ul>
+          <li><a href="#">London</a></li>
+          <li><a href="#">Paris</a></li>
+          <li><a href="#">Tokyo</a></li>
+        </ul>
+      </nav>
+      <article>
+        <h1>London</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor aliquam porro explicabo consequatur, sed placeat culpa, consectetur ex nulla
+          nostrum libero? Minima nisi saepe fugit perferendis alias esse aspernatur dicta?
+        </p>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias omnis officiis temporibus? Deserunt, explicabo iure rerum dicta dolore quis
+          enim natus dolorum necessitatibus nulla? Fugiat consectetur et est, ea voluptas, officiis, unde tempora facere eaque temporibus quo dolorum
+          tenetur sequi. Beatae maxime enim a, harum ratione facilis blanditiis veniam numquam perferendis distinctio ab. Suscipit esse assumenda
+          maxime totam aspernatur eum, cum quaerat in, eveniet adipisci tempore, eligendi tempora repellendus numquam! Ab aspernatur explicabo amet
+          dignissimos, laudantium repudiandae, deleniti, omnis unde reiciendis odio molestiae illo voluptates excepturi in deserunt asperiores
+          provident veritatis. Blanditiis eum cum vero consequatur labore minus eos facilis!
+        </p>
+      </article>
+    </section>
+    <footer>
+      <p>Footer</p>
+    </footer>
+  </body>
+</html>

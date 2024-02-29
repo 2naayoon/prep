@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: auto;
+        height: 100px;
+        background-color: blueviolet;
+      }
+      span {
+        width: 100px;
+        height: 100px;
+        background-color: brown;
+        /* display: block; */
+        padding: 20px;
+        margin: 20px;
+      }
+      /* p : 가운데 정렬 */
+      p {
+        text-align: center;
+      }
+      /* p a : 배경색 blue, 글자색 white, 밑줄 제거 */
+      p a {
+        background-color: blue;
+        color: white;
+        text-decoration: none;
+        /* padding: 10px; */
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        /* display: none; 요소 숨김 */
+        line-height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        블럭 요소 vs 인라인 요소
+        
+        1. 블럭 요소
+        - 한 행을 전체 사용
+        - width : 100% (기본값)
+        - height : 0 (기본값)
+
+        2. 인라인 요소
+        - 내용만큼만 사용
+        - width, height → 강제 지정 불가 (자식 요소(내용)에 의해 width, height 결정)
+
+        블럭요소 → 인라인요소, 인라인요소 → 블럭요소
+        display: block, display: inline, display: inline-block, display: none
+     -->
+    <div></div>
+    <span></span>
+    <p>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+    </p>
+    <span>안녕하세요</span>
+    <span>안녕하세요</span>
+    <span>안녕하세요</span>
+    <span>안녕하세요</span>
+    <span>안녕하세요</span>
+  </body>
+</html>

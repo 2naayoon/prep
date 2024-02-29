@@ -1,0 +1,48 @@
+/* 
+시계 방향(top, right, bottom, left)
+padding : 안쪽여백
+margin : 바깥쪽여백
+border : 테두리
+
+padding : 20px;  시계방향 전체를 20px로 지정
+padding : 15px 20px;  top-15px, right-20px, bottom-마주보는 쪽 15px, left-마주보는 쪽 20px
+padding : 10px 15px 18px;
+ */
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 20px; /* 시계 방향(top, right, bottom, left) */
+  margin: 8px 0; /* 0 은 단위 안 씀 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #4caf50;
+  padding: 14px 20px;
+  color: white;
+  margin: 9px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; /* 손모양 */
+}
+
+/* #45a049 */
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* 입력 창 클릭 시(focus) 배경색 변경 */
+input[type="text"]:focus {
+  background-color: beige;
+}
+
+div {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+}

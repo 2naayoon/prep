@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #ddd;
+      }
+      .box {
+        background-color: white;
+        /* height: 50px; */
+        overflow: hidden;
+      }
+      .left {
+        float: left;
+      }
+      .right {
+        float: right;
+      }
+      .clearfix {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        부모는 자식이 float 되어버리면 자식요소인 줄 모름
+        1) 해결법 - overflow:hidden → float 이후의 다른 요소들이 제자리를 찾지 못함
+        2)          clear: both → float 해제
+     -->
+    <div class="box">
+      <img src="../img/left-arrow.png" alt="" class="left" />
+      <img src="../img/right-arrow.png" alt="" class="right" />
+      <div class="clearfix">Awesome</div>
+    </div>
+  </body>
+</html>

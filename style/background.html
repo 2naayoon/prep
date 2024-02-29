@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .bg {
+        width: 200px;
+        height: 100px;
+        /* background-color: azure; */
+        /* background: red; */
+      }
+      .bg {
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+        background-image: url(../img/bg.png);
+        background-repeat: no-repeat; /* repeat (기본값) */
+        background-position: center center; /* left top (기본값) */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        background
+        - 색상
+        - 이미지
+            background-image
+            background-repeat : 이미지 반복
+            background-position : 이미지 위치
+            background-attachment : 이미지 스크롤 여부
+                - 배경 이미지가 요소를 따라서 스크롤이 될 것인지 말 것인지 여부
+                - scroll(기본), fixed(뷰포트에 고정되어 요소와 같이 스크롤되지 않음)
+     -->
+    <div class="bg"></div>
+  </body>
+</html>
