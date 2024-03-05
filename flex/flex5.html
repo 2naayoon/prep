@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        border: 2px solid;
+      }
+      .container div {
+        width: 100px;
+        height: 100px;
+      }
+      /* 배경색 */
+      .container .item:nth-child(1) {
+        background: red;
+        /* order: 1; */
+      }
+      .container .item:nth-child(2) {
+        background: blue;
+      }
+      .container .item:nth-child(3) {
+        background: green;
+      }
+      .container .item:nth-child(4) {
+        background: magenta;
+        /* order: 1; */
+      }
+      .container .item:nth-child(5) {
+        background: yellow;
+      }
+      .container .item:nth-child(6) {
+        background: crimson;
+        /* order: -1; */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        레이아웃 : 위-아래 수직 구성(스크롤 사용)
+
+        1. 수평(왼 → 오)
+        1) float
+        2) inline-block
+        3) flex
+          1) flex 컨테이너에 설정하는 값
+           - flex-direction(방향): row(기본 : 왼 → 오), column(위 → 아래), row-reverse(float:right 와 같음), column-reverse; 
+           - flex-wrap(여러줄 허용 여부) : wrap(여러 줄로 이동시 맨 나중 요소부터), nowrap(기본:한줄로),wrap-reverse(여러 줄로 이동시 맨 첫번째 요소부터) 
+           - justify-content(주 축 정렬) : flex-start(기본-왼쪽정렬), flext-end(오른쪽정렬), center, space-between(첫요소는 왼쪽에 마지막 요소는 오른쪽으로 몰고 요소 사이에 공백 배치), space-around(모든 요소 사이에 공백 배치-가운데 배치 요소는 공백 2배), space-evenly(모든 요소 사이에 공백을 동일하게)
+               주축 : 요소가 배치되는 방향(flex-direction:row 라면 가로축, flex-direction:column → 세로축 )
+               보조(교차)축 : 주축과 교차 되는 축
+           - align-content(교차 축 정렬) : 교차 축 공간이 있고, 주축에서 여러 줄 허용
+               stretch : 부모의 height 에 맞춰 자식 높이가 늘어남(기본-공백 안 생김)
+               flex-start, flext-end,center, space-between,space-around,space-evenly
+           - align-items : 한 줄 일 때 정렬(align-content 와 같이 사용되는 경우 align-content 우선)
+               stretch(기본) : 컨테이너 교차축을 채우기 위해 items 늘림
+               flex-start, flext-end,center,baseline(item 을 문자 기준선에 정렬)
+
+          2) flex 아이템 설정 값
+           - order : flex item 순서 설정
+                     기본값 0 / 음수 값 지정 가능 / 음수값의 경우 앞 쪽 배치 / order 값이 같으면 태그 순서
+           - flex-grow : item 너비 증가 비율(width 가 auto 여야 의미가 있음)
+     -->
+    <div class="container">
+      <div class="item">A</div>
+      <div class="item">B</div>
+      <div class="item">C</div>
+      <div class="item">D</div>
+      <div class="item">E</div>
+      <div class="item">F</div>
+    </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus mollitia maiores ea eius amet reiciendis ipsam. Expedita quibusdam quia
+      doloremque veniam placeat dolor! Sint similique debitis dicta ex eligendi?
+    </p>
+  </body>
+</html>

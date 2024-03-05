@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      .container div {
+        margin: 0 2px;
+        background-color: silver;
+        height: 300px;
+        width: 33.33%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        레이아웃 : 위-아래 수직 구성(스크롤 사용)
+
+        1. 수평(왼 → 오)
+        1) float
+        2) inline-block
+        3) flex
+           - flex-direction(방향): row(기본 : 왼 → 오), column(위 → 아래), row-reverse(float:right 와 같음), column-reverse;  
+     -->
+    <div class="container">
+      <div>flex-item1</div>
+      <div>flex-item2</div>
+      <div>flex-item3</div>
+    </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus mollitia maiores ea eius amet reiciendis ipsam. Expedita quibusdam quia
+      doloremque veniam placeat dolor! Sint similique debitis dicta ex eligendi?
+    </p>
+  </body>
+</html>
