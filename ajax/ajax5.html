@@ -39,10 +39,12 @@
       fetch("https://2naayoon.github.io/MOCK_DATA.json")
         .then((response) => {
           if (!response.ok) throw new Error();
+
+          // 데이터가 잘 도착 시
           return response.json();
         })
         .then((data) => {
-          let result = `<ul>`;
+          let result = "";
           data.forEach((item) => {
             result += `<tr>`;
             result += `<th scope="row"> ${item.id}</th>`;
@@ -52,7 +54,6 @@
             result += `<td>${item.ip_address}</td>`;
             result += `</tr>`;
           });
-          result += `</ul>`;
 
           document.querySelector("tbody").innerHTML = result;
         })
