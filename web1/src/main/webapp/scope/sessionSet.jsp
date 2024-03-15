@@ -4,5 +4,6 @@
     // 세션 설정
     session.setAttribute("name", "Session Test!!!");
     session.setAttribute("age", "25");
+    // 페이지 이동
     response.sendRedirect("sessionTest.jsp");
 %>
