@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/include/header.jsp"%>
-<h1>Todo</h1>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page import="dao.TodoDao"%>
+<%@ page import="dto.TodoDto"%>
+<%@ page import="java.util.List"%>
+<%@ include file="../include/header.jsp"%>
+<%
+    // DB 연동
+    TodoDao dao = new TodoDao();
+    List<TodoDto> list = dao.getList();
+%>
+<h1 class="mt-5">Todo List</h1>
 <table class="table">
   <thead>
     <tr>
@@ -11,12 +19,26 @@
     </tr>
   </thead>
   <tbody>
+  <% for(TodoDto dto:list){%>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row"><%=dto.getNo()%></th>
+      <%-- <td><a href="주소?no=<%=dto.getNo()%>"> --%>
+      <td><a href="readPro.jsp?no=<%=dto.getNo()%>"><%=dto.getTitle()%></a></td>
+      <td><%=dto.getCreatedAt()%></td>
+      <%-- boolean타입 - get (x) is 사용 --%>
+      <%-- <td><%=dto.isCompleted()%></td> --%>
+    <td>
+      <%
+        out.print("<input type='checkbox'  id='completed' class='form-check-input' name='completed' value='true' disabled ");
+        if(dto.isCompleted()){
+          out.print("checked >");
+        } else {
+          out.print(">");
+        }
+      %>
+    </td>
     </tr>
+      <% }%>
   </tbody>
 </table>
-<%@ include file="/include/footer.jsp"%>
+<%@ include file="../include/footer.jsp"%>

@@ -20,6 +20,7 @@
     // 쿠키 가져오기
     Cookie[] cookies = request.getCookies();
 %>
+
 <h4>이름 : <%=getCookieValue(cookies,"name")%></h4>
 <h4>성별 : <%=getCookieValue(cookies,"gender")%></h4>
 <h4>나이 : <%=getCookieValue(cookies,"age")%></h4>
