@@ -5,6 +5,7 @@
     EL : jsp에서 사용
          getAttribute("name") = ${name}
          getAttribute("loginDto"), <%=loginDto.getName()%> = ${loginDto.name}
+    prefix="c" 가 기본
  --%>
 <%-- <c:url value="/jstl/jstl.jsp"/> --%>
 <%-- c:if (else 개념 없음) --%>

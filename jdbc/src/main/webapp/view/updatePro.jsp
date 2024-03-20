@@ -5,7 +5,7 @@
     // 한글 처리
     request.setCharacterEncoding("utf-8");
 
-    // modify 가져오기
+    // no, description, completed, title 가져오기
     // value 가 없는 경우 checkbox, radio 의 경우에는 on 값을 갖고 오게 됨 (체크가 안 되면 off)
     String no = request.getParameter("no");
     String description = request.getParameter("description");
