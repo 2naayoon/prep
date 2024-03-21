@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import dto.BookDto;
 
 public class BookDao {
@@ -28,16 +33,29 @@ public class BookDao {
 
     // 2. 커넥션 얻어오기
     public Connection getConnection() {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String user = "c##test2";
-        String password = "test";
+        // String url = "jdbc:oracle:thin:@localhost:1521:xe";
+        // String user = "c##test2";
+        // String password = "test";
 
+        // try {
+        // con = DriverManager.getConnection(url, user, password);
+        // } catch (SQLException e) {
+        // e.printStackTrace();
+        // }
+
+        // return con;
+
+        // Tomcat
+        Context initContext;
         try {
-            con = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
+            initContext = new InitialContext();
+            // java:/comp/env : 등록된 이름 관리
+            Context envContext = (Context) initContext.lookup("java:/comp/env");
+            DataSource ds = (DataSource) envContext.lookup("jdbc/myoracle");
+            con = ds.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         return con;
     }
 
@@ -134,9 +152,60 @@ public class BookDao {
         return result;
     }
 
+    // SerachList
+    public List<BookDto> getSearchList(String criteria, String keyword) {
+        List<BookDto> list = new ArrayList<>();
+        con = getConnection();
+        String sql = "";
+
+        // 검색기준(criteria)이 code 라면
+        // SELECT * FROM BOOKTBL WHERE code=?;
+        // 검색기준(criteria)이 writer 라면
+        // SELECT * FROM BOOKTBL WHERE writer=?;
+
+        if (criteria.equals("code")) {
+            sql = "SELECT * FROM BOOKTBL WHERE code=?";
+        } else {
+            sql = "SELECT * FROM BOOKTBL WHERE writer=?";
+        }
+
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, keyword);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                BookDto dto = new BookDto();
+                dto.setCode(rs.getInt("code"));
+                dto.setTitle(rs.getString("title"));
+                dto.setWriter(rs.getString("writer"));
+                dto.setPrice(rs.getInt("price"));
+
+                list.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt, rs);
+        }
+        return list;
+    }
+
     // Delete
-    public int delete(BookDto deleteDto) {
+    public int delete(int code) {
         int result = 0;
+        con = getConnection();
+        String sql = "delete booktbl where code=?";
+
+        try {
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, code);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt, rs);
+        }
+
         return result;
     }
 

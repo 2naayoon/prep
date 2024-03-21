@@ -1,4 +1,4 @@
-<Context docBase="book" path="" reloadable="true">
+<Context docBase="todo_m2" path="" reloadable="true">
 <!-- name : 저장소 이름, 최대 20개까지 저장 -->
 <Resource name="jdbc/myoracle" auth="Container"
               type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"

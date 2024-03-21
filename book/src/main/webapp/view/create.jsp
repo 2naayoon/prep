@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="/include/header.jsp"%>
-<h3 class="border-bottom mb-3">도서상세보기</h3>
+<h3 class="border-bottom mb-3">도서추가</h3>
 <form action='<c:url value="/create"/>' method="post">
 <div class="mb-3">
   <label for="code" class="form-label">code</label>
