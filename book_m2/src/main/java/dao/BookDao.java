@@ -277,14 +277,15 @@ public class BookDao {
         return result;
     }
 
-    public int leave(MemberDto leaveDto) {
+    public int memberDel(MemberDto delDto) {
         int result = 0;
         con = getConnection();
-        String sql = "delete membertbl where password=?";
+        String sql = "delete membertbl where userid = ? and password=?";
 
         try {
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, leaveDto.getPassword());
+            pstmt.setString(1, delDto.getUserid());
+            pstmt.setString(2, delDto.getPassword());
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

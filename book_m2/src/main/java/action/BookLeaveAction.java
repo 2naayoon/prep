@@ -14,18 +14,20 @@ public class BookLeaveAction implements Action {
 
     @Override
     public ActionForward execute(HttpServletRequest req) throws Exception {
-        MemberDto dto = new MemberDto();
-        dto.setUserid(req.getParameter("userid"));
-        dto.setPassword(req.getParameter("password"));
+        MemberDto delDto = new MemberDto();
+        delDto.setUserid(req.getParameter("userid"));
+        delDto.setPassword(req.getParameter("password"));
 
         BookService service = new BookServiceImpl();
-        boolean result = service.leave(dto);
+        boolean result = service.leave(delDto);
 
-        if (!result) {
+        if (result) {
+            // 탈퇴 시 기존 세션 제거
+            HttpSession session = req.getSession();
+            session.invalidate();
+        } else {
             path = "/view/leave.jsp";
         }
-        HttpSession session = req.getSession();
-        session.invalidate();
 
         return new ActionForward(path, true);
     }
