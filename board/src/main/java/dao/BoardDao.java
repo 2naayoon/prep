@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +116,10 @@ public class BoardDao {
                 dto.setName(rs.getString(3));
                 dto.setContent(rs.getString("content"));
                 dto.setAttach(rs.getString("attach"));
+                // reply 에서 필요함
+                dto.setReRef(rs.getInt("re_ref"));
+                dto.setReSeq(rs.getInt("re_seq"));
+                dto.setReLev(rs.getInt("re_lev"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,6 +127,93 @@ public class BoardDao {
             close(con, pstmt, rs);
         }
         return dto;
+    }
+
+    // 특정 글 수정
+    public int update(BoardDto updateDto) {
+        // bno와 password 일치 시 제목,내용 수정
+        int result = 0;
+
+        try {
+            con = getConnection();
+            String sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ? WHERE BNO=? AND PASSWORD = ?";
+            pstmt = con.prepareStatement(sql);
+
+            pstmt.setString(1, updateDto.getTitle());
+            pstmt.setString(2, updateDto.getContent());
+            pstmt.setInt(3, updateDto.getBno());
+            pstmt.setString(4, updateDto.getPassword());
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt);
+        }
+        return result;
+    }
+
+    public int delete(BoardDto deleteDto) {
+        // bno와 password 일치시 삭제
+        int result = 0;
+
+        try {
+            con = getConnection();
+            String sql = "DELETE FROM BOARD WHERE bno=? AND password=?";
+            pstmt = con.prepareStatement(sql);
+
+            pstmt.setInt(1, deleteDto.getBno());
+            pstmt.setString(2, deleteDto.getPassword());
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt);
+        }
+        return result;
+    }
+
+    // 댓글 작성
+    public int reply(BoardDto replyDto) {
+        int result = 0;
+
+        try {
+            con = getConnection();
+
+            // 원본글의 re_ref, re_seq, re_lev 가져오기
+            int reRef = replyDto.getReRef();
+            int reSeq = replyDto.getReSeq();
+            int reLev = replyDto.getReLev();
+
+            String sql = "UPDATE board SET RE_SEQ = RE_SEQ + 1 WHERE RE_REF = ? AND re_seq > ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, reRef);
+            pstmt.setInt(2, reSeq);
+
+            pstmt.executeUpdate();
+
+            sql = "INSERT INTO BOARD(bno,name,password,title,content,re_ref,RE_LEV,RE_SEQ) ";
+            sql += "values(board_seq.nextval,?,?,?,?,?,?,?)";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, replyDto.getName());
+            pstmt.setString(2, replyDto.getPassword());
+            pstmt.setString(3, replyDto.getTitle());
+            pstmt.setString(4, replyDto.getContent());
+            pstmt.setInt(5, reRef);
+            pstmt.setInt(6, reLev + 1);
+            pstmt.setInt(7, reSeq + 1);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt);
+        }
+        return result;
     }
 
     // 4. 자원 정리
@@ -134,6 +226,17 @@ public class BoardDao {
             if (con != null)
                 con.close();
         } catch (Exception e) {
+        }
+    }
+
+    public void close(Connection con, PreparedStatement pstmt) {
+        try {
+            if (pstmt != null)
+                pstmt.close();
+            if (con != null)
+                con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

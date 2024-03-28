@@ -31,7 +31,7 @@
 				<div class="form-group  row">
 					<label for="filename" class="col-sm-2 col-form-label">파일첨부</label>
 					<div class="col-sm-10">
-						${dto.attach}
+						<a href='<c:url value="/view/download.jsp?fileName=${dto.attach}" />'>${dto.attach}</a>	
 					</div>
 				</div>
 				<div style="height:10px"></div>
@@ -47,5 +47,8 @@
 		</form>
 	</div>
 </section>
-<script src='<c:url value="/js/view.js"/>'></script>
+<script>
+	const bno = ${dto.bno};
+</script>
+<script src='<c:url value="/js/read.js" />'></script>
 <%@include file="/include/footer.jsp"%>
