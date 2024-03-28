@@ -48,6 +48,7 @@
 	</div>
 </section>
 <script>
+// jsp 에서 bno 가져와 js 변수에 담기
 	const bno = ${dto.bno};
 </script>
 <script src='<c:url value="/js/read.js" />'></script>

@@ -17,6 +17,8 @@ import action.BoardListAction;
 import action.BoardModifyAction;
 import action.BoardReadAction;
 import action.BoardReplyAction;
+import action.BoardSearchAction;
+import action.BoardUpdateCountAction;
 import action.BoardWriteAction;
 
 // 파일 업로드 지원 : MultipartConfig(사이즈) 안 주면 무한대 unlimited
@@ -55,7 +57,15 @@ public class BoardControllerServlet extends HttpServlet {
             action = new BoardReadAction("/view/qna_board_reply.jsp");
         } else if (cmd.equals("/qReply.do")) {
             action = new BoardReplyAction("/qList.do");
+        } else if (cmd.equals("/qCount.do")) {
+            // read 로 갈 일을 두 개로 분리 - read 로 감
+            action = new BoardUpdateCountAction("/qRead.do");
         }
+
+        // list 로 합쳐놓음
+        // else if (cmd.equals("/qSearch.do")) {
+        // action = new BoardSearchAction("/view/qna_board_list.jsp");
+        // }
 
         // 생성된 action 에게 일 시키기 (서블릿이 해야했던 일)
         ActionForward af = null;
