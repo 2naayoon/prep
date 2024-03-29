@@ -7,6 +7,7 @@ import dto.BoardDto;
 import dto.SearchDto;
 
 public class BoardServiceImpl implements BoardService {
+
     BoardDao dao = new BoardDao();
 
     @Override
@@ -45,7 +46,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDto> searchlist(SearchDto searchDto) {
+    public List<BoardDto> searchList(SearchDto searchDto) {
         return dao.getSearchList(searchDto);
     }
 
@@ -53,4 +54,15 @@ public class BoardServiceImpl implements BoardService {
     public int getTotalRows(String criteria, String keyword) {
         return dao.getRows(criteria, keyword);
     }
+
+    @Override
+    public boolean pwdCheck(BoardDto passDto) {
+        return dao.pwdCheck(passDto) == 1;
+    }
+
+    @Override
+    public boolean deleteAll(int reRef) {
+        return dao.deleteAll(reRef) == 1;
+    }
+
 }

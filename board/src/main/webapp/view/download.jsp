@@ -28,7 +28,6 @@
     out.clear();
     out=pageContext.pushBody();
 
-// 버퍼 사용 - 빠르게 다운로드
     BufferedOutputStream buf = new BufferedOutputStream(response.getOutputStream());
 
     int numRead;

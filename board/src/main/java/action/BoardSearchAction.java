@@ -12,16 +12,19 @@ import service.BoardServiceImpl;
 
 @AllArgsConstructor
 public class BoardSearchAction implements Action {
+
     private String path;
 
     @Override
     public ActionForward execute(HttpServletRequest req) throws Exception {
+
         SearchDto searchDto = new SearchDto();
         searchDto.setCriteria(req.getParameter("criteria"));
         searchDto.setKeyword(req.getParameter("keyword"));
 
+        // BoardService list 호출
         BoardService service = new BoardServiceImpl();
-        List<BoardDto> list = service.searchlist(searchDto);
+        List<BoardDto> list = service.searchList(searchDto);
 
         // req 결과 담기
         req.setAttribute("list", list);
@@ -31,5 +34,4 @@ public class BoardSearchAction implements Action {
 
         return new ActionForward(path, false);
     }
-
 }

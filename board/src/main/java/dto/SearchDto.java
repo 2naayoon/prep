@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class SearchDto {
+
     private int page; // 페이지번호
     private int amount; // 페이지당 게시물 수
 

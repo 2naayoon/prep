@@ -21,16 +21,16 @@ import action.BoardSearchAction;
 import action.BoardUpdateCountAction;
 import action.BoardWriteAction;
 
-// 파일 업로드 지원 : MultipartConfig(사이즈) 안 주면 무한대 unlimited
-@MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 50)
 @WebServlet("*.do")
+// 파일 업로드 지원 : MultipartConfig(사이즈) 안 주면 무한대 unlimited
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 50) // 파일 업로드 지원
 public class BoardControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 한글처리
         req.setCharacterEncoding("utf-8");
 
-        // URI 분리 작업
+        // URI 분리
         // 8080 이후의 주소 갖고옴
         String requestUri = req.getRequestURI();
         // context 들어올수 있으니 받기
@@ -38,7 +38,7 @@ public class BoardControllerServlet extends HttpServlet {
         // 주소 잘라내기
         String cmd = requestUri.substring(contextPath.length());
 
-        // cmds 를 가지고 액션 생성
+        // cmd를 가지고 액션 생성
         Action action = null;
 
         if (cmd.equals("/qList.do")) {
@@ -58,16 +58,13 @@ public class BoardControllerServlet extends HttpServlet {
         } else if (cmd.equals("/qReply.do")) {
             action = new BoardReplyAction("/qList.do");
         } else if (cmd.equals("/qCount.do")) {
-            // read 로 갈 일을 두 개로 분리 - read 로 감
             action = new BoardUpdateCountAction("/qRead.do");
         }
-
-        // list 로 합쳐놓음
         // else if (cmd.equals("/qSearch.do")) {
         // action = new BoardSearchAction("/view/qna_board_list.jsp");
         // }
 
-        // 생성된 action 에게 일 시키기 (서블릿이 해야했던 일)
+        // 생성된 action에게 일 시키기(서블릿(~Pro)이 해야했던 일)
         ActionForward af = null;
         try {
             af = action.execute(req);
@@ -77,7 +74,7 @@ public class BoardControllerServlet extends HttpServlet {
 
         // 이동방식과 경로에 따라 움직이기
         if (af.isRedirect()) {
-            resp.sendRedirect((af.getPath()));
+            resp.sendRedirect(af.getPath());
         } else {
             RequestDispatcher rd = req.getRequestDispatcher(af.getPath());
             rd.forward(req, resp);

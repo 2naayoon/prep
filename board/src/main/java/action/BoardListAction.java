@@ -13,14 +13,15 @@ import service.BoardServiceImpl;
 
 @AllArgsConstructor
 public class BoardListAction implements Action {
+
     private String path;
 
     @Override
     public ActionForward execute(HttpServletRequest req) throws Exception {
+
         // BoardService list 호출
         // null 일 경우 -integer~ 하면 NullPointerException
         // http://localhost:8080/qList.do?page=1&amount=30
-
         int page = Integer.parseInt(req.getParameter("page"));
         int amount = Integer.parseInt(req.getParameter("amount"));
 
@@ -39,5 +40,4 @@ public class BoardListAction implements Action {
 
         return new ActionForward(path, false);
     }
-
 }

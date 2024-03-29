@@ -1,6 +1,7 @@
 package action;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,19 +14,26 @@ import service.BoardServiceImpl;
 
 @AllArgsConstructor
 public class BoardWriteAction implements Action {
+
     private String path;
 
     @Override
     public ActionForward execute(HttpServletRequest req) throws Exception {
+
         // qna_board_write.jsp 넘긴 값 가져오기
         BoardDto insertDto = new BoardDto();
-
         insertDto.setName(req.getParameter("name"));
-        insertDto.setPassword(req.getParameter("password"));
         insertDto.setTitle(req.getParameter("title"));
         insertDto.setContent(req.getParameter("content"));
+        insertDto.setPassword(req.getParameter("password"));
 
-        // 파일 업로드 처리
+        // 페이지 나누기 개념 추가 후
+        String page = req.getParameter("page");
+        String amount = req.getParameter("amount");
+        String criteria = req.getParameter("criteria");
+        String keyword = URLEncoder.encode(req.getParameter("keyword"), "utf-8");
+
+        // 업로드 처리
         Part part = req.getPart("attach");
         String fileName = getFileName(part);
 
@@ -33,10 +41,10 @@ public class BoardWriteAction implements Action {
 
         if (!fileName.isEmpty()) {
 
-            UUID uuid = UUID.randomUUID();
             // 중복파일명은 저장을 해주지 않음 → 서버에 저장 시 다른 이름 사용
             // 고유한 값 생성 → 고유한값_사용자가 올린 파일명
             // saveDir : "c:\\upload" / File.separator : \\ / uuid : 고유한 값을 만들어줌
+            UUID uuid = UUID.randomUUID();
             File uploadFile = new File(saveDir + File.separator + uuid + "_" + fileName);
 
             // c:\\upload\\1.jpg~ 저장
@@ -53,7 +61,12 @@ public class BoardWriteAction implements Action {
 
         // true : 목록, false : qna_board_write.jsp
         if (!service.insert(insertDto)) {
-            path = "/view/qna_board_write.jsp";
+            path = "/view/qna_board_write.jsp?page=" + page + "&amount=" + amount + "&criteria=" + criteria
+                    + "&keyword=" + keyword;
+        } else {
+            // /qList.do
+            path += "?page=" + page + "&amount=" + amount
+                    + "&criteria=" + criteria + "&keyword=" + keyword;
         }
 
         // req.setAttribute - 무조건 false
@@ -61,12 +74,11 @@ public class BoardWriteAction implements Action {
         return new ActionForward(path, true);
     }
 
-    // 파일 업로드
     private String getFileName(Part part) {
         // Content-Disposition: attachment; filename="filename.jpg"
         // 키 값 검사해서 파일 갖고오고
-        String header = part.getHeader("content-disposition");
         // ; 으로 분리
+        String header = part.getHeader("content-disposition");
         String[] arr = header.split(";");
         for (int i = 0; i < arr.length; i++) {
             String temp = arr[i];

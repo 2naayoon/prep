@@ -1,5 +1,5 @@
 // 폼이 비어 있는지 확인
-document.querySelector("form").addEventListener("submit", (e) => {
+document.querySelector("#writeForm").addEventListener("submit", (e) => {
   e.preventDefault();
 
   const name = document.querySelector("#name");
@@ -8,25 +8,28 @@ document.querySelector("form").addEventListener("submit", (e) => {
   const password = document.querySelector("#password");
 
   if (!name.value) {
-    alert("작성자를 입력해주세요.");
+    alert("이름을 확인해 주세요");
     name.focus();
     return;
   } else if (!title.value) {
-    alert("제목를 입력해주세요.");
+    alert("제목을 확인해 주세요");
     title.focus();
     return;
   } else if (!content.value) {
-    alert("내용을 입력해주세요.");
+    alert("내용을 확인해 주세요");
     content.focus();
     return;
   } else if (!password.value) {
-    alert("비밀번호를 입력해주세요.");
+    alert("비밀번호를 확인해 주세요");
     password.focus();
     return;
   }
+
   e.target.submit();
 });
 
 document.querySelector("#list").addEventListener("click", () => {
-  location.href = "/qList.do";
+  // location.href = "/qList.do";
+  // actionForm 보내기
+  document.querySelector("#actionForm").submit();
 });

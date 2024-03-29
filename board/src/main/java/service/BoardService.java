@@ -9,9 +9,9 @@ public interface BoardService {
     // 서비스 - dao 호출해서 결과 담는 작업
     List<BoardDto> list(SearchDto searchDto);
 
-    BoardDto read(int bno);
-
     boolean insert(BoardDto insertDto);
+
+    BoardDto read(int bno);
 
     boolean update(BoardDto updateDto);
 
@@ -21,7 +21,11 @@ public interface BoardService {
 
     boolean updateCount(int bno);
 
-    List<BoardDto> searchlist(SearchDto searchDto);
+    List<BoardDto> searchList(SearchDto searchDto);
 
     int getTotalRows(String criteria, String keyword);
+
+    boolean pwdCheck(BoardDto passDto);
+
+    boolean deleteAll(int reRef);
 }

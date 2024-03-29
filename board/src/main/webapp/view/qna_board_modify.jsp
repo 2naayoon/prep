@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@include file="/include/header.jsp"%>
 <!-- Main content -->
 <section class="content">
@@ -13,7 +12,7 @@
 				<div class="form-group row">
 					<label for="name" class="col-sm-2 col-form-label">글쓴이</label>
 					<div class="col-sm-10" >
-					<input type="text" name="name" size="10" class="form-control" maxlength='10' value="${dto.name}">
+					<input type="text" name="name" size="10" class="form-control"	maxlength='10' value="${dto.name}">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -48,8 +47,18 @@
 				</div>
 				<div style="height:20px"></div>
 			</div>
+			<input type="hidden" name="page" value="${searchDto.page}">
+			<input type="hidden" name="amount" value="${searchDto.amount}">
+			<input type="hidden" name="criteria" value="${searchDto.criteria}">
+			<input type="hidden" name="keyword" value="${searchDto.keyword}">
 		</form>
 	</div>
 </section>
+<form action='<c:url value="/qList.do" />' method="get" id="actionForm">
+	<input type="hidden" name="page" value="${searchDto.page}">
+	<input type="hidden" name="amount" value="${searchDto.amount}">
+	<input type="hidden" name="criteria" value="${searchDto.criteria}">
+	<input type="hidden" name="keyword" value="${searchDto.keyword}">
+</form>
 <script src='<c:url value="/js/modify.js" />'></script>
 <%@include file="/include/footer.jsp"%>

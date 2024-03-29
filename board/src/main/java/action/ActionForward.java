@@ -2,7 +2,7 @@ package action;
 
 public class ActionForward {
     private String path; // 경로 지정 변수
-    private boolean redirect; // sendRedirect 여부(true) - forward(false)
+    private boolean redirect; // sendRedirect 여부(true)
 
     public String getPath() {
         return path;
@@ -27,4 +27,5 @@ public class ActionForward {
         this.path = path;
         this.redirect = redirect;
     }
+
 }

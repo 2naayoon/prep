@@ -1,6 +1,6 @@
 package dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +10,9 @@ import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @ToString
+@Setter
+@Getter
 public class BoardDto {
     private int bno;
     private String name;

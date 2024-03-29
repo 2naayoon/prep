@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/include/header.jsp"%>
+<%@include file="../include/header.jsp"%>
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-header">
@@ -12,8 +12,7 @@
 				<div class="form-group row">
 					<label for="name" class="col-sm-2 col-form-label">작성자</label>
 					<div class="col-sm-10">
-						<input type="text" name="name" size="10" class="form-control"
-								maxlength='10'>
+						<input type="text" name="name" size="10" class="form-control" maxlength='10'>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -50,8 +49,13 @@
 				<input type="hidden" name="reSeq" value="${dto.reSeq}">
 				<input type="hidden" name="reLev" value="${dto.reLev}">
 				<input type="hidden" name="bno" value="${dto.bno}">
+				<%-- 페이지 나누기 정보 --%>
+				<input type="hidden" name="page" value="${searchDto.page}">
+				<input type="hidden" name="amount" value="${searchDto.amount}">
+				<input type="hidden" name="criteria" value="${searchDto.criteria}">
+				<input type="hidden" name="keyword" value="${searchDto.keyword}">
 			</div>
 		</form>
 	</div>
 </section>
-<%@include file="/include/footer.jsp"%>
+<%@include file="../include/footer.jsp"%>
