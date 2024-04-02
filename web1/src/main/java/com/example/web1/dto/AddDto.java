@@ -1,4 +1,4 @@
-package com.example.web1.controller;
+package com.example.web1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
