@@ -25,7 +25,7 @@ import lombok.ToString;
 @Setter
 @Table(name = "mart_member")
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
     @SequenceGenerator(name = "mart_member_seq_gen", sequenceName = "member_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mart_member_seq_gen")
@@ -41,6 +41,7 @@ public class Member {
     private String street;
 
     @Builder.Default
+    // Many 지연 로딩 기본
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 

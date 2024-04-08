@@ -27,11 +27,18 @@ public class LockerRepositoryTest {
         });
 
         // SportsMember 삽입
-        LongStream.range(1, 4).forEach(i -> {
+        LongStream.range(10, 13).forEach(i -> {
             SportsMember sportsMember = SportsMember.builder().name("user" + i).locker(Locker.builder().id(i).build())
                     .build();
             sportsMemberRepository.save(sportsMember);
         });
+    }
+
+    @Test
+    public void updateTest() {
+        SportsMember sportsMember = sportsMemberRepository.findById(6L).get();
+        sportsMember.setName("홍길동");
+        sportsMemberRepository.save(sportsMember);
     }
 
     @Test
@@ -40,5 +47,14 @@ public class LockerRepositoryTest {
         SportsMember sportsMember = sportsMemberRepository.findById(1L).get();
         System.out.println(sportsMember);
         System.out.println(sportsMember.getLocker());
+    }
+
+    @Test
+    public void readTest2() {
+        // locker 조회 후 회원정보 조회
+        Locker locker = lockerRepository.findById(1L).get();
+        System.out.println(locker);
+        System.out.println("회원아이디 " + locker.getSportsMember().getId());
+        System.out.println("회원명 " + locker.getSportsMember().getName());
     }
 }

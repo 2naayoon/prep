@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.mart.entity.Delivery;
+import com.example.mart.entity.DeliveryStatus;
 import com.example.mart.entity.Item;
 import com.example.mart.entity.Member;
 import com.example.mart.entity.Order;
@@ -30,6 +32,9 @@ public class MartRepositoryTest {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private DeliveryRepository deliveryRepository;
+
     @Test
     public void insertTest() {
         // 멤버3
@@ -45,14 +50,20 @@ public class MartRepositoryTest {
 
     // 주문
     @Test
-    public void orderInsertTest() {
+    public void orderInsertDeliveryTest() {
         // 누가 주문하느냐?
         Member member = Member.builder().id(1L).build();
         // 어떤 아이템
-        Item item = Item.builder().id(1L).build();
+        Item item = Item.builder().id(2L).build();
+
+        // 배송지 입력
+        Delivery delivery = Delivery.builder().city("서울시").street("123-12").zipcode("11160")
+                .deliveryStatus(DeliveryStatus.READY).build();
+        deliveryRepository.save(delivery);
 
         // 주문 + 주문상품 (오더부터 넣어주면 문제 없음)
         Order order = Order.builder().member(member).orderDate(LocalDateTime.now()).orderStatus(OrderStatus.ORDER)
+                .delivery(delivery)
                 .build();
         orderRepository.save(order);
 
@@ -87,12 +98,14 @@ public class MartRepositoryTest {
         // @OneToMany 를 이용해 조회
         // 관련있는 엔티티를 처음부터 안 가지고 옴
         // Order : OrderItem
-        Order order = orderRepository.findById(1L).get();
+        Order order = orderRepository.findById(3L).get();
         System.out.println(order); // 에러발생 =>
 
         // Order 를 기준으로 OrderItem 조회
         // 1. @Transactional 2. FetchType 변경
         System.out.println(order.getOrderItems());
+        // 배송지 조회
+        System.out.println(order.getDelivery().getCity());
     }
 
     @Transactional
@@ -137,4 +150,12 @@ public class MartRepositoryTest {
         orderRepository.deleteById(1L);
     }
 
+    @Test
+    public void deliveryOrderGet() {
+        // 배송지를 통해서 관련있는 Order 가져오기
+        Delivery delivery = deliveryRepository.findById(2L).get();
+
+        System.out.println(delivery);
+        System.out.println("관련 주문 " + delivery.getOrder());
+    }
 }
