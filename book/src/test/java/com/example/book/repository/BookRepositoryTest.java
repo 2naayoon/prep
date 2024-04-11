@@ -1,8 +1,8 @@
 package com.example.book.repository;
 
-import static org.mockito.Mockito.mockitoSession;
-
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.book.entity.Book;
 import com.example.book.entity.Category;
 import com.example.book.entity.Publisher;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
 public class BookRepositoryTest {
@@ -61,5 +63,37 @@ public class BookRepositoryTest {
                     .publisher(Publisher.builder().id((i % 5) + 1).build()).build();
             bookRepository.save(book);
         });
+    }
+
+    @Transactional
+    @Test
+    public void testBookList() {
+        List<Book> books = bookRepository.findAll();
+
+        books.forEach(book -> {
+            System.out.println(book);
+
+            // *Error : LazyInitializationException
+            // fetch 방식 LAZY - 나중에 사용 시 갖고 오는 방법
+            // 필요한데 안 갖고 와서 오류
+            // → @Transactional 사용
+            System.out.println("출판사 " + book.getPublisher().getName());
+            System.out.println("분야 " + book.getCategory().getName());
+        });
+    }
+
+    @Test
+    public void testCateNameList() {
+        List<Category> list = categoryRepository.findAll();
+
+        list.forEach(category -> System.out.println(category));
+        // Category(id=1, name=컴퓨터)
+        // List<String> cateList = new ArrayList<>();
+        // list.forEach(category -> cateList.add(category.getName()));
+
+        // strean() : 요즘 방법
+        List<String> cateList = list.stream().map(entity -> entity.getName()).collect(Collectors.toList());
+
+        cateList.forEach(System.out::println);
     }
 }
