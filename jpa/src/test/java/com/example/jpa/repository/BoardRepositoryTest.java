@@ -72,8 +72,11 @@ public class BoardRepositoryTest {
 
     @Test
     public void queryMethodTest() {
-        // where b1_0.title=? - Title 과 일치하는 것 x
-        // Title...1 - like % 사용
+        List<Board> list = boardRepository.findList();
+        System.out.println("findList " + list.size());
+
+        // // where b1_0.title=? → Title 과 일치하는 것 x
+        // // Title...1 → like % 사용
         // List<Board> list = boardRepository.findByTitle("Title");
         // System.out.println("findByTitle " + list.size()); // 0
 
@@ -118,9 +121,10 @@ public class BoardRepositoryTest {
 
         // Springframwork.data.domain
         // PageRequest.of(페이지번호, 게시물 수); 페이지번호 0 부터 시작
-        Pageable pageable = PageRequest.of(0, 10);
-        List<Board> list = boardRepository.findByIdGreaterThanOrderByIdDesc(0L, pageable);
-        list.forEach(System.out::println);
+        // Pageable pageable = PageRequest.of(0, 10);
+        // List<Board> list = boardRepository.findByIdGreaterThanOrderByIdDesc(0L,
+        // pageable);
+        // list.forEach(System.out::println);
 
         // list.forEach(System.out::println);
     }

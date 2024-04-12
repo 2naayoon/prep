@@ -1,8 +1,8 @@
 package com.example.mart.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -157,5 +157,26 @@ public class MartRepositoryTest {
 
         System.out.println(delivery);
         System.out.println("관련 주문 " + delivery.getOrder());
+    }
+
+    @Transactional
+    @Test
+    public void testJoinTest() {
+        List<Object[]> list = orderRepository.joinList();
+
+        for (Object[] objects : list) {
+            Order order = (Order) objects[0];
+            Member member = (Member) objects[1];
+            OrderItem orderItem = (OrderItem) objects[2];
+            System.out.println("---------- test 메소드");
+            System.out.println(order);
+            System.out.println(member);
+        }
+
+        // Member
+        System.out.println(orderRepository.members());
+
+        // Item
+        System.out.println();
     }
 }
