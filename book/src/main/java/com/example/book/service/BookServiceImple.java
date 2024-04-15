@@ -2,14 +2,20 @@ package com.example.book.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.book.dto.BookDto;
+import com.example.book.dto.PageRequestDto;
+import com.example.book.dto.PageResultDto;
 import com.example.book.entity.Book;
 import com.example.book.entity.Category;
 import com.example.book.entity.Publisher;
@@ -27,16 +33,29 @@ public class BookServiceImple implements BookService {
     private final CategoryRepository categoryRepository;
     private final PublisherRepository publisherRepository;
 
+    // 페이지 나누기 전
+    // @Override
+    // public List<BookDto> getList() {
+    // // 정렬
+    // List<Book> books = bookRepository.findAll(Sort.by("id").descending());
+
+    // // List<BookDto> bookDtos = new ArrayList<>();
+    // // books.forEach(book -> bookDtos.add(entityToDto(book)));
+    // List<BookDto> bookDtos = books.stream().map(book ->
+    // entityToDto(book)).collect(Collectors.toList());
+
+    // return bookDtos;
+    // }
+
+    // 페이지 나누기 후
     @Override
-    public List<BookDto> getList() {
-        // 정렬
-        List<Book> books = bookRepository.findAll(Sort.by("id").descending());
+    public PageResultDto<BookDto, Book> getList(PageRequestDto requestDto) {
+        Pageable pageable = requestDto.getPageable(Sort.by("id").descending());
 
-        // List<BookDto> bookDtos = new ArrayList<>();
-        // books.forEach(book -> bookDtos.add(entityToDto(book)));
-        List<BookDto> bookDtos = books.stream().map(book -> entityToDto(book)).collect(Collectors.toList());
-
-        return bookDtos;
+        Page<Book> result = bookRepository
+                .findAll(bookRepository.makePredicate(requestDto.getType(), requestDto.getKeyword()), pageable);
+        Function<Book, BookDto> fn = (entity -> entityToDto(entity));
+        return new PageResultDto<>(result, fn);
     }
 
     @Override

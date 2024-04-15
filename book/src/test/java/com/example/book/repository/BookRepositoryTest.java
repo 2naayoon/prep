@@ -113,7 +113,7 @@ public class BookRepositoryTest {
 
         // Page : 페이지 나누기에 필요한 메소드 제공
         // = PageDto 와 같은 역할
-        Page<Book> result = bookRepository.findAll(bookRepository.makePredicate(), pageable);
+        Page<Book> result = bookRepository.findAll(bookRepository.makePredicate("t", "스프링"), pageable);
 
         System.out.println("전체 행 개수 " + result.getTotalElements());
         System.out.println("필요한 페이지 수 " + result.getTotalPages());
