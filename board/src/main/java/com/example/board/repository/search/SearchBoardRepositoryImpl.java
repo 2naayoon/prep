@@ -51,6 +51,10 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 
         JPQLQuery<Tuple> tuple = query.select(board, member, replyCount);
 
+        // where b1_0.bno>?
+        // and (b1_0.title like ? escape '!'
+        // or b1_0.content like ? escape '!'
+        // or w1_0.email like ? escape '!')
         // 검색
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(board.bno.gt(0L));
