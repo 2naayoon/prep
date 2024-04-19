@@ -1,5 +1,6 @@
 package com.example.board.repository;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.board.entity.Board;
 import com.example.board.entity.Reply;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
 public class ReplyRepositoryTest {
@@ -29,5 +32,25 @@ public class ReplyRepositoryTest {
                     .build();
             replyRepository.save(reply);
         });
+    }
+
+    @Transactional
+    @Test
+    public void getRow() {
+        Reply reply = replyRepository.findById(11L).get();
+        System.out.println(reply);
+
+        // FetchType.LAZY 이기 때문에 reply 부모 게시물 안 가지고 옴
+        System.out.println(reply.getBoard());
+    }
+
+    @Test
+    public void getReplies() {
+
+        // SELECT * FROM REPLY r WHERE r.BOARD_BNO = 100;
+        Board board = Board.builder().bno(2L).build();
+        List<Reply> replies = replyRepository.getRepliesByBoardOrderByRno(board);
+
+        System.out.println(replies.toString());
     }
 }
