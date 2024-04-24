@@ -21,6 +21,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/static/**", "/css/*", "/assetes/*", "/img/*", "/js/*").permitAll()
+                // read만 열고 modify는 제한을 주기 위해 컨트롤러 바깥에서 설정
+                .requestMatchers("/board/read").permitAll()
+                .requestMatchers("/board/modify").authenticated()
                 .anyRequest().permitAll())
                 .formLogin(login -> login.loginPage("/member/login").permitAll())
                 .logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))

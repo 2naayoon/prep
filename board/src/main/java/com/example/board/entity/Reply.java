@@ -30,7 +30,10 @@ public class Reply extends BaseEntity {
 
     private String text; // 댓글 내용
 
-    private String replyer; // 댓글작성자
+    // private String replyer; // 댓글작성자
+    // 시큐리티 걸기 위해서는 관계 걸어야함
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member replyer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;

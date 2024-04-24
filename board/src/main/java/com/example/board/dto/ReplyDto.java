@@ -17,9 +17,16 @@ import lombok.ToString;
 @Builder
 public class ReplyDto {
     private Long rno;
-    private String text;
-    private String replyer;
-    private Long bno;
+
+    private String text; // 댓글내용
+
+    // 시큐리티 이후 수정
+    // private String replyer;
+    private String writerEmail; // 작성자 아이디
+    private String writerName; // 작성자 이름
+
+    private Long bno; // 부모글 번호
+
     private LocalDateTime createdDate;
     private LocalDateTime lastModifiedDate;
 }
