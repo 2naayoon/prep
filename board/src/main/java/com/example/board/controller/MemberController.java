@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.board.dto.MemberDto;
 import com.example.board.dto.PageRequestDto;
@@ -38,14 +39,28 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public String postRegister(@Valid MemberDto dto, BindingResult result,
+    public String postRegister(@Valid MemberDto dto, BindingResult result, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto requestDto) {
         log.info("회원가입 요청 {}", dto);
 
         if (result.hasErrors())
             return "/member/register";
 
-        service.register(dto);
+        try {
+            service.register(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // addAttribute : 주소줄에 딸려보냄
+            // rttr.addAttribute("dupEmail", e.getMessage());
+            // addFlashAttribute : 잠깐 세션형태로 보냄
+            rttr.addFlashAttribute("dupEmail", e.getMessage());
+
+            // sendredirect 방식
+            return "redirect:/member/register";
+            // forward 방식
+            // return "/member/register";
+        }
+
         return "redirect:/member/login";
     }
 
