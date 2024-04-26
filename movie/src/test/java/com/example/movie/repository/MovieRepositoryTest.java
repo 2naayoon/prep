@@ -3,6 +3,7 @@ package com.example.movie.repository;
 import static org.mockito.ArgumentMatchers.isNull;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -19,6 +20,8 @@ import com.example.movie.entity.Member;
 import com.example.movie.entity.Movie;
 import com.example.movie.entity.MovieImage;
 import com.example.movie.entity.Review;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
 public class MovieRepositoryTest {
@@ -112,5 +115,30 @@ public class MovieRepositoryTest {
         for (Object[] objects : list) {
             System.out.println(Arrays.toString(objects));
         }
+    }
+
+    @Test
+    public void movieGetTest() {
+        List<Object[]> result = movieImageRepository.getMovieRow(3L);
+
+        for (Object[] objects : result) {
+            System.out.println(Arrays.toString(objects));
+        }
+    }
+
+    // 테이블 3개 - 하나라도 실패하면 되돌림
+    @Transactional
+    @Test
+    public void movieRemoveTest() {
+        Movie movie = Movie.builder().mno(100L).build();
+
+        // 이미지 삭제
+        movieImageRepository.deleteByMovie(movie);
+
+        // 리뷰 삭제
+        reviewRepository.deleteByMovie(movie);
+
+        // 영화 삭제
+        movieRepository.delete(movie);
     }
 }

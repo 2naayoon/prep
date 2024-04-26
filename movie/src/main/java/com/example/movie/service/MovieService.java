@@ -14,6 +14,10 @@ import com.example.movie.entity.MovieImage;
 public interface MovieService {
     PageResultDto<MovieDto, Object[]> getList(PageRequestDto pageRequestDto);
 
+    MovieDto getRow(Long mno);
+
+    void movieRemove(Long mno);
+
     // [Movie(mno=99, title=Movie99), MovieImage(inum=296,
     // uuid=98fc2592-6d21-4015-a9fe-65a21ec35236, imgName=img0.jpg, path=null), 1,
     // 3.0]
@@ -23,7 +27,7 @@ public interface MovieService {
         MovieDto movieDto = MovieDto.builder()
                 .mno(movie.getMno())
                 .title(movie.getTitle())
-                .avg(avg)
+                .avg(avg != null ? avg : 0.0d)
                 .reviewCnt(reviewCnt)
                 .createdDate(movie.getCreatedDate())
                 .lastModifiedDate(movie.getLastModifiedDate())
