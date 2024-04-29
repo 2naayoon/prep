@@ -13,7 +13,7 @@ public class HomeController {
     @GetMapping("/")
     public String getHome() {
         log.info("home 요청");
-        return "/movie/register";
+        return "/movie/list";
     }
 
 }
