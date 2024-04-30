@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" method="post">
+      <div>
+        <input type="text" name="name" id="name" />
+      </div>
+      <button type="submit">전송</button>
+    </form>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // jQuery
+      // 자바스크립트 대용 (예전 버전)
+      // 예전 스크립트 : 브라우저마다 다르게 코드 작성, 긴 코드 등의 단점
+      // jQuery 가 이런 단점 보완
+      // → 현재 자바스크립트는 이런 단점 보완된 버전 → jQuery를 굳이 사용할 필요 x
+      // but 여전히 웹 사이트에는 jQuery 기반인 사이트가 많이 존재
+
+      // dom 요소 접근, ajax 간편
+      // 라이브러리 로드 → 네트워크 부담
+
+      // form 요소 찾기
+      const form = $("form");
+      console.log(form);
+
+      const name = $("#name");
+      console.log(name);
+
+      const header = $("h1");
+      console.log(header.html()); // innerHTML, innerText
+    </script>
+  </body>
+</html>
