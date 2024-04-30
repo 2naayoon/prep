@@ -43,21 +43,46 @@ public class MovieController {
         model.addAttribute("dto", service.getRow(mno));
     }
 
+    @PostMapping("/modify")
+    public String postModify(MovieDto movieDto, RedirectAttributes rttr,
+            @ModelAttribute("requestDto") PageRequestDto pageRequestDto) {
+        log.info("movie 수정 요청 ()", movieDto);
+
+        Long mno = service.movieUpdate(movieDto);
+
+        rttr.addFlashAttribute("msg", mno);
+        rttr.addAttribute("mno", movieDto.getMno());
+        rttr.addAttribute("page", pageRequestDto.getPage());
+        // size : 10개로 고정, 고정 시 굳이 필요 x
+        rttr.addAttribute("size", pageRequestDto.getSize());
+        rttr.addAttribute("type", pageRequestDto.getType());
+        rttr.addAttribute("keyword", pageRequestDto.getKeyword());
+        return "redirect:/movie/read";
+    }
+
     @PostMapping("/remove")
-    public String getRemove(@RequestParam Long mno, @ModelAttribute("requestDto") PageRequestDto pageRequestDto) {
+    public String getRemove(@RequestParam Long mno, RedirectAttributes rttr,
+            @ModelAttribute("requestDto") PageRequestDto pageRequestDto) {
         log.info("영화 삭제 요청 {}", mno);
 
         service.movieRemove(mno);
+
+        rttr.addAttribute("page", pageRequestDto.getPage());
+        // size : 10개로 고정, 고정 시 굳이 필요 x
+        rttr.addAttribute("size", pageRequestDto.getSize());
+        rttr.addAttribute("type", pageRequestDto.getType());
+        rttr.addAttribute("keyword", pageRequestDto.getKeyword());
         return "redirect:/movie/list";
     }
 
     @GetMapping("/register")
-    public void getRegister() {
+    public void getRegister(@ModelAttribute("requestDto") PageRequestDto pageRequestDto) {
         log.info("영화 등록 폼 요청");
     }
 
     @PostMapping("/register")
-    public String postRegister(MovieDto movieDto, RedirectAttributes rttr) {
+    public String postRegister(MovieDto movieDto, RedirectAttributes rttr,
+            @ModelAttribute("requestDto") PageRequestDto pageRequestDto) {
         log.info("영화 등록 {}", movieDto);
 
         // 서비스 호출
@@ -65,7 +90,11 @@ public class MovieController {
 
         // mno 넘기기
         rttr.addFlashAttribute("msg", mno);
-
+        rttr.addAttribute("page", pageRequestDto.getPage());
+        // size : 10개로 고정, 고정 시 굳이 필요 x
+        rttr.addAttribute("size", pageRequestDto.getSize());
+        rttr.addAttribute("type", pageRequestDto.getType());
+        rttr.addAttribute("keyword", pageRequestDto.getKeyword());
         return "redirect:/movie/list";
     }
 

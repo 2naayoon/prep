@@ -1,6 +1,5 @@
 package com.example.movie.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +20,8 @@ public interface MovieService {
     void movieRemove(Long mno);
 
     Long movieInsert(MovieDto movieDto);
+
+    Long movieUpdate(MovieDto movieDto);
 
     // [Movie(mno=99, title=Movie99), MovieImage(inum=296,
     // uuid=98fc2592-6d21-4015-a9fe-65a21ec35236, imgName=img0.jpg, path=null), 1,
