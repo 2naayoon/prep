@@ -8,14 +8,13 @@ function checkExtension(fileName) {
   // 정규식 사용
   const regex = /(.*?).(png|gif|jpg)$/;
 
+  // txt=>false, 이미지=>true
   console.log(regex.test(fileName));
   return regex.test(fileName);
 }
 
 function showUploadImages(arr) {
   console.log("showUploadImages ", arr);
-
-  const output = document.querySelector("#output");
 
   let tags = "";
 

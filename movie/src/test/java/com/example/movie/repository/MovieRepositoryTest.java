@@ -65,15 +65,24 @@ public class MovieRepositoryTest {
     @Test
     public void memberInsertTest() {
         // 멤버 샘플 데이터 추가
-        IntStream.rangeClosed(1, 100).forEach(i -> {
-            Member member = Member.builder()
-                    .email("mem" + i + "@naver.com")
-                    .password(passwordEncoder.encode("1111"))
-                    .nickname("reviewer" + i)
-                    .role(MemberRole.MEMBER)
-                    .build();
-            memberRepository.save(member);
-        });
+        // IntStream.rangeClosed(1, 100).forEach(i -> {
+        // Member member = Member.builder()
+        // .email("mem" + i + "@naver.com")
+        // .password(passwordEncoder.encode("1111"))
+        // .nickname("reviewer" + i)
+        // .role(MemberRole.MEMBER)
+        // .build();
+        // memberRepository.save(member);
+        // });
+
+        // admin 계정
+        Member member = Member.builder()
+                .email("admin1@naver.com")
+                .password(passwordEncoder.encode("1111"))
+                .nickname("admin1")
+                .role(MemberRole.ADMIN)
+                .build();
+        memberRepository.save(member);
     }
 
     @Test

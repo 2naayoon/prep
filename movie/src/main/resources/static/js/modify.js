@@ -11,6 +11,8 @@ document.querySelector(".uploadResult").addEventListener("click", (e) => {
   }
 });
 
+// 삭제 버튼 클릭
+// actionForm 보내기
 const form = document.querySelector("#actionForm");
 
 document.querySelector(".btn-danger").addEventListener("click", () => {
