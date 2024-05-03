@@ -1,15 +1,129 @@
 package com.example.movie.service;
 
+import java.util.Optional;
+
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-public class MovieUserServiceImpl implements UserDetailsService {
+import com.example.movie.constant.MemberRole;
+import com.example.movie.dto.AuthMemberDto;
+import com.example.movie.dto.MemberDto;
+import com.example.movie.dto.PasswordChangeDto;
+import com.example.movie.entity.Member;
+import com.example.movie.repository.MemberRepository;
+import com.example.movie.repository.ReviewRepository;
+
+import groovyjarjarantlr4.v4.parse.ANTLRParser.ruleReturns_return;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
+@RequiredArgsConstructor
+@Service
+public class MovieUserServiceImpl implements UserDetailsService, MovieUserService {
+
+    private final MemberRepository memberRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final ReviewRepository reviewRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        log.info("로그인 요청 {}", username);
         // 시큐리티에서 사용하는 로그인 메서드
-        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
+        // User 로 리턴 or User 구현한 CustomUser 로 리턴
+        // Optional<Member> result = memberRepository.findById(null);
+
+        // if (result.isPresent()) {
+        // Member member = result.get();
+
+        // return User.builder()
+        // .username(member.getEmail())
+        // .password(member.getPassword())
+        // .roles(member.getRole().toString())
+        // .build();
+        // }
+
+        Optional<Member> result = memberRepository.findByEmail(username);
+        if (!result.isPresent())
+            throw new UsernameNotFoundException("Check Email");
+        Member member = result.get();
+        // entity → dto
+
+        return new AuthMemberDto(entityToDto(member));
+    }
+
+    @Override
+    public String register(MemberDto insertDto) throws IllegalStateException {
+
+        // 중복 이메일 확인
+        validateDuplicateEmail(insertDto.getEmail());
+        // 비밀번호 암호화
+        insertDto.setPassword(passwordEncoder.encode(insertDto.getPassword()));
+        // 권한 부여
+        insertDto.setRole(MemberRole.MEMBER);
+
+        Member member = memberRepository.save(dtoToEntity(insertDto));
+        return member.getEmail();
+    }
+
+    // 중복 이메일 검사
+    public void validateDuplicateEmail(String email) throws IllegalStateException {
+        Optional<Member> result = memberRepository.findByEmail(email);
+
+        if (result.isPresent()) {
+            throw new IllegalStateException("이미 가입된 회원입니다.");
+        }
+    }
+
+    @Transactional
+    @Override
+    public void nickNameUpdate(MemberDto upMemberDto) {
+        // 1) select 2) select 결과에 따라 insert or update
+        // memberRepository.save(dtoToEntity(upMemberDto));
+
+        memberRepository.updateNickname(upMemberDto.getNickname(), upMemberDto.getEmail());
+    }
+
+    @Override
+    public void passwordUpdate(PasswordChangeDto pDto) throws IllegalStateException {
+        // 현재 비밀번호 일치 여부 → true → 비밀번호 변경
+        // select → 일치 결과 나오면 → update 구문(비밀번호 변경)
+        Member member = memberRepository.findByEmail(pDto.getEmail()).get();
+        // 담겨져서 갖고 나올 때 비밀번호는 이미 암호화된 상태
+        // PasswordEncoder 메서드
+        // passwordEncoder.encode(1111) : 암호화 시 사용
+        // passwordEncoder.matches(rawPassword, encodePassword) : 1111,
+        // {bcrypt}$2a$10$j9qjOBAdLhd5.jgubYGtP.JxGzjQF69qnfPPXL4adDpPuFDHFd1Q
+
+        // 비밀번호는 암호화된 상태
+        if (!passwordEncoder.matches(pDto.getCurrentPassword(), member.getPassword())) {
+            throw new IllegalStateException("현재 비밀번호가 다릅니다.");
+        } else {
+            member.setPassword(passwordEncoder.encode(pDto.getNewPassword()));
+            memberRepository.save(member);
+        }
+
+    }
+
+    @Transactional
+    @Override
+    public void leave(MemberDto leaveMemberDto) {
+        Member member = memberRepository.findByEmail(leaveMemberDto.getEmail()).get();
+
+        // 이메일과 비밀번호 일치 시
+        if (!passwordEncoder.matches(leaveMemberDto.getPassword(), member.getPassword())) {
+            throw new IllegalStateException("비밀번호를 확인해주세요.");
+        } else {
+            reviewRepository.deleteByMember(member);
+            memberRepository.delete(member);
+        }
     }
 
 }

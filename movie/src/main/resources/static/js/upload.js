@@ -56,7 +56,11 @@ fileInput.addEventListener("change", (e) => {
   }
 
   fetch("/upload/uploadAjax", {
+    // csrf 토큰 없으면 error → csrf 토큰 넣어줘야함
     method: "post",
+    headers: {
+      "X-CSRF-TOKEN": csrfValue,
+    },
     body: formData,
   })
     .then((response) => response.json())

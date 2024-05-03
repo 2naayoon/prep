@@ -30,6 +30,7 @@ public class HomeController {
     }
 
     // 폼 로그인 : login 성공 시 Authentication 객체를 던져줌
+    // auth : 확인용 - 로그인 성공 시 Authentication 객체 생성해서 SecurityContext 안에 담아줌
     @PreAuthorize("permitAll()")
     @ResponseBody
     @GetMapping("/auth")
