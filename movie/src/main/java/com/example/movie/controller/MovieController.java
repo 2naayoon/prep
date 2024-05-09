@@ -62,7 +62,7 @@ public class MovieController {
     }
 
     @PostMapping("/remove")
-    public String getRemove(@RequestParam Long mno, RedirectAttributes rttr,
+    public String postRemove(@RequestParam Long mno, RedirectAttributes rttr,
             @ModelAttribute("requestDto") PageRequestDto pageRequestDto) {
         log.info("영화 삭제 요청 {}", mno);
 
