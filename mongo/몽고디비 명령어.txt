@@ -1,0 +1,37 @@
+몽고디비 명령어
+
+- 몽고디비 시작
+sudo systemctl start mongod
+
+- 몽고디비 현재 상태
+sudo systemctl status mongod
+
+- 몽고디비 환경설정 파일 열기
+sudo nano /etc/mongod.conf
+
+- 몽고디비 종료
+sudo systemctl stop mongod
+
+- 몽고 쉘 접속
+mongosh
+
+- admin 으로 변경
+use admin
+
+- 몽고 쉘 종료
+exit
+
+- 새로운 사용자 생성
+db.createUser(
+{
+	user: "pyuser",
+	pwd: "pyuser",
+	roles: [
+		{ role: "userAdminAnyDatabase", db: "admin"},
+		{ role: "readWriteAnyDatabase", db: "admin"},
+	]
+})
+
+데이터베이스 권한 여부는 아이디와 비밀번호 사용하겠음
+security:
+  authorization: enabled
