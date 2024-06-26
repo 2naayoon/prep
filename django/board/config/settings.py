@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fc0^723+9t*@7^b1@e__@-jp=b&basf7u(8109&+5-j!zw^!^j'
+SECRET_KEY = 'django-insecure--e@@#z^1g1t5)yr5uow4f_9o%rle0i-*%b7=vy%vxr1y0^)c5i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "app1",
-    "users"
+    'board'
 ]
 
 MIDDLEWARE = [
@@ -53,10 +52,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+# 장고는 기본적으로 앱/templates 만 자동 인식
+# 프로젝트 밑에 두어야 앱을 여러 개 만들었을 때 적용
+# 'DIRS' 에 경로 명시해서 사용 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,6 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# BASE_DIR : board 프로젝트 디렉토리 밑에 static 폴더 사용
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
