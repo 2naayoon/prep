@@ -15,3 +15,5 @@ class UserForm(UserCreationForm):
         # 비밀번호는 필수로 같이 들어감
         # username == id
         fields = ["username", "email"]
+        # 사용자 이름 대신 아이디로 사용
+        labels = {"username":"아이디"}

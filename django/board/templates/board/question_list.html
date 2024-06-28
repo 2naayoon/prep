@@ -1,6 +1,7 @@
 <!-- extends 가 항상 처음 다음에 load 순서 -->
 {% extends "base.html" %}
 {% load board_filter %}
+{% load static %}
 {% block content %}
   <div class="container">
     <div class="row mt-3 justify-content-between">
@@ -44,6 +45,7 @@
                 <td>
                   <span class="badge text-bg-warning px-2 py-1">
                     <!--질문 추천 수 보여주기-->
+                    {{question.voter.count}}
                   </span>
                 </td>
                 <td>
@@ -61,6 +63,7 @@
                 </td>
                 <td>
                   <!-- 질문 작성자 -->
+                  {{question.author}}
                 </td>
                 <td>
                   <!-- 질문 작성일시 -->
@@ -109,7 +112,10 @@
     <!--페이지 번호 클릭 시 이동할 폼-->
     <form action="" method="get" id="actionForm">
       <input type="hidden" name="keyword" value="" id="keyword"/>
-      <input type="hidden" name="page" value="" id="page"/>
+      <input type="hidden" name="page" value="{{page}}" id="page"/>
     </form>
   </div>
 {% endblock content %}
+{% block script %}
+  <script src="{% static "js/list.js" %}"></script>
+{% endblock script %}
