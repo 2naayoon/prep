@@ -12,6 +12,7 @@ def vote_question(request, qid):
     if question.author == request.user:
         messages.error(request, "본인이 작성한 글은 추천할 수 없습니다.")
     else:
+        # 알아서 중복 제외
         question.voter.add(request.user)
     return redirect("board:question_detail", qid)
 

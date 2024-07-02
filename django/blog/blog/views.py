@@ -1,9 +1,28 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Post, Comment
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+
+
+def comment_create(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == "POST":
+        content = request.POST.get("content").strip()
+
+        # form 안 쓰면 아래 2가지 방법
+        Comment.objects.create(user=request.user, post=post, content=content)
+        
+        # comment = Comment(user=request.user, post=post, content=content)
+        # comment.save()
+
+        return redirect("blog:detail", post_id)
+
+    return redirect("blog:detail", post_id)
+
+
 
 def delete(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -36,6 +55,10 @@ def create(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+
+            # 태그 저장
+            form.save_m2m()
+
             # 리스트로 이동
             return redirect("blog:list")
             # return redirect("blog:detail", post.id)
@@ -64,4 +87,30 @@ def detail(request, post_id):
     
     post = get_object_or_404(Post, id=post_id)
 
-    return render(request, "blog/post.html", {"post":post})
+    # 로그인 유저가 해당 게시물에 좋아요 했는지 여부 model 에 Post.likes 정의
+    is_liked = False
+    if post.likes.filter(id=request.user.id).exists():
+        is_liked = True
+
+    return render(request, "blog/post.html", {"post":post, "is_liked":is_liked})
+
+
+# 좋아요
+def post_like(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    
+    # 로그인 유저가 해당 게시물에 조하요 했는지 여부
+    is_liked = post.likes.filter(id= request.user.id).exists()
+
+    is_liked_change = False
+
+    if is_liked:
+        # 이미 좋아요 한 것 제외
+        post.likes.remove(request.user)
+    else:
+        # 추가만은 add만 하면 됨
+        # 알아서 중복 제외
+        post.likes.add(request.user)
+        is_liked_change = True
+
+    return JsonResponse({"likes":post.likes.count(), "is_liked": is_liked_change})
