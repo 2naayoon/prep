@@ -36,7 +36,7 @@ public class TodoController {
         List<TodoDto> list = service.getList();
         model.addAttribute("list", list);
 
-        return "/todo/list";
+        return "todo/list";
     }
 
     // /todo/create
