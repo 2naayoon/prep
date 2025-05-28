@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      div {
+        height: 150px;
+        overflow: auto;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam veniam id earum labore quibusdam, sed in! Asperiores soluta qui, quis sunt ipsam
+      nesciunt dolores labore dolor, amet consequuntur alias praesentium ipsum placeat provident culpa. Iusto voluptas aliquid ullam blanditiis eos
+      repudiandae? Doloremque amet quidem minus explicabo culpa dolorem ab voluptatibus eius cupiditate voluptate libero adipisci cumque nostrum sint
+      exercitationem rerum quae optio quisquam nemo in, reprehenderit aperiam eaque. Optio aspernatur consectetur exercitationem. Quasi, odio ipsam
+      minus beatae reprehenderit sint, rerum pariatur cumque nam cupiditate minima nisi hic facere, exercitationem soluta similique cum fugiat ut
+      delectus quam perspiciatis ipsa! Adipisci, nisi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam veniam id earum labore
+      quibusdam, sed in! Asperiores soluta qui, quis sunt ipsam nesciunt dolores labore dolor, amet consequuntur alias praesentium ipsum placeat
+      provident culpa. Iusto voluptas aliquid ullam blanditiis eos repudiandae? Doloremque amet quidem minus explicabo culpa dolorem ab voluptatibus
+      eius cupiditate voluptate libero adipisci cumque nostrum sint exercitationem rerum quae optio quisquam nemo in, reprehenderit aperiam eaque.
+      Optio aspernatur consectetur exercitationem. Quasi, odio ipsam minus beatae reprehenderit sint, rerum pariatur cumque nam cupiditate minima nisi
+      hic facere, exercitationem soluta similique cum fugiat ut delectus quam perspiciatis ipsa! Adipisci, nisi. Lorem ipsum, dolor sit amet
+      consectetur adipisicing elit. Ipsam veniam id earum labore quibusdam, sed in! Asperiores soluta qui, quis sunt ipsam nesciunt dolores labore
+      dolor, amet consequuntur alias praesentium ipsum placeat provident culpa. Iusto voluptas aliquid ullam blanditiis eos repudiandae? Doloremque
+      amet quidem minus explicabo culpa dolorem ab voluptatibus eius cupiditate voluptate libero adipisci cumque nostrum sint exercitationem rerum
+      quae optio quisquam nemo in, reprehenderit aperiam eaque. Optio aspernatur consectetur exercitationem. Quasi, odio ipsam minus beatae
+      reprehenderit sint, rerum pariatur cumque nam cupiditate minima nisi hic facere, exercitationem soluta similique cum fugiat ut delectus quam
+      perspiciatis ipsa! Adipisci, nisi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam veniam id earum labore quibusdam, sed in!
+      Asperiores soluta qui, quis sunt ipsam nesciunt dolores labore dolor, amet consequuntur alias praesentium ipsum placeat provident culpa. Iusto
+      voluptas aliquid ullam blanditiis eos repudiandae? Doloremque amet quidem minus explicabo culpa dolorem ab voluptatibus eius cupiditate
+      voluptate libero adipisci cumque nostrum sint exercitationem rerum quae optio quisquam nemo in, reprehenderit aperiam eaque. Optio aspernatur
+      consectetur exercitationem. Quasi, odio ipsam minus beatae reprehenderit sint, rerum pariatur cumque nam cupiditate minima nisi hic facere,
+      exercitationem soluta similique cum fugiat ut delectus quam perspiciatis ipsa! Adipisci, nisi.
+    </div>
+    <script>
+      const div = document.querySelector("div");
+      console.log(div.scrollHeight); // 스크롤 높이 + div height
+      console.log(div.clientHeight); // div height
+
+      // 스크롤을 끝까지 내리면 alert 띄우기
+      div.addEventListener("scroll", () => {
+        // scrollTop(세로 스크롤 위치) == scrollY
+        if (div.scrollTop == div.scrollHeight - div.clientHeight) {
+          alert("회원 약관을 다 읽었습니다.");
+        }
+      });
+    </script>
+  </body>
+</html>
