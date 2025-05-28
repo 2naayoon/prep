@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- a : 링크 태그
+             손모양, 밑줄, 색상, 현재 창에서 페이지 이동이 들어감
+            1) 색상
+             (1) 링크 방문 전 색상 : blue
+             (2) 링크 방문 후 색상 : purple
+             (3) 링크 active 색상 : red
+
+            속성
+            1) href : 태그 클릭 시 가야할 곳
+               ① 상대주소 : 현재 문서를 기준으로 연결할 문서가 어디 있는지 표현 (대부분 사용)
+               ② 절대주소 : 경로를 처음부터 끝까지 다 쓰는 형태 (외부 경로 링크)
+            2) target : 어디에 링크를 띄울 것인지 결정
+               ① _self : default
+               ② _blank : 새 창
+    -->
+    <a href="https://www.naver.com/" target="_blank">naver</a>
+    <p>
+      <!-- 
+            상대주소 : . (현재폴더) / .. (상위폴더)
+            htmlsource ---- basic
+                       ---- link ---- link1.html
+                       ---- list
+         -->
+      <a href="../list/list.html" target="_blank">공고</a>
+    </p>
+  </body>
+</html>

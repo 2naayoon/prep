@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        form : 웹 서버에 정보를 제출하기 위한 양식 범위를 정의
+
+        속성
+        1) action : form 안에 정보들을 어디로 전송할 것인가에 대한 URL(절대경로, 상대경로)
+        2) method : 서버로 전송할 HTTP 방식 (get / post)
+           - get(기본) : 주소 줄에 특정 값들이 따라다님 (검색)
+                   https:\\naver.com?query=영화&ie=utf8
+           - post : 전송된 값들이 감춰짐 (로그인, 회원가입)   
+
+        폼 요소
+        1) input 태그
+            (1) text : 한 줄 짜리 텍스트 입력용
+            (2) radio : 여러개 중에 하나만 선택 시 사용 (name을 동일하게 줘야함)
+            (3) checkbox : 여러개 중에 여러개 선택 시 사용 (name을 다르게 줘야함)
+            (4) submit : 폼 서버로 전송
+            (5) reset : 폼 안의 입력 내용 초기화
+            (6) button : 기능은 없음 (모양만 버튼 모양으로) → javascript 와 연동
+            (7) password : 비밀번호를 입력할 수 있도록 mask 처리 됨
+
+        전역속성 : 모든 태그에 사용할 수 있는 속성
+        class, id, name, data-*
+        id : 현재 페이지에서 값은 중복 안 됨
+     -->
+
+    <div>
+      <img src="../image/dog1.jpg" alt="" />
+    </div>
+    <div>
+      <img src="../image/dog2.jpg" alt="" />
+    </div>
+
+    <form action="" method="get">
+      <div>
+        <label for="firstname">First name:</label>
+      </div>
+      <div>
+        <input type="text" name="firstname" id="firstname" />
+      </div>
+      <div>
+        <label for="lastname">Last name:</label>
+      </div>
+      <div>
+        <input type="text" name="lastname" id="lastname" />
+      </div>
+      <div>
+        <input type="submit" value="전송" />
+      </div>
+    </form>
+
+    <!-- http://192.168.0.20:5500/form/form1.html?firstname=hong&lastname=dong -->
+    <!-- action 주소 ? key=value & key=value 
+         key : input 요소의 name 값
+         value : 사용자 입력 값
+
+         http://192.168.0.20:5500/form/form1.html?firstname=&lastname=dong
+         입력 없으면 빈 상태
+    -->
+  </body>
+</html>
