@@ -1,0 +1,43 @@
+package com.example.board.controller;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.board.dto.PageRequestDto;
+
+@Log4j2
+@Controller
+public class HomeController {
+
+    @PreAuthorize("permitAll()")
+    @GetMapping("/")
+    public String home(RedirectAttributes rttr, @ModelAttribute("requestDto") PageRequestDto requestDto) {
+        log.info("home 요청");
+
+        rttr.addAttribute("page", requestDto.getPage());
+        rttr.addAttribute("type", requestDto.getType());
+        rttr.addAttribute("keyword", requestDto.getKeyword());
+        return "redirect:board/list";
+    }
+
+    // 폼 로그인 : login 성공 시 Authentication 객체를 던져줌
+    // auth : 확인용 - 로그인 성공 시 Authentication 객체 생성해서 SecurityContext 안에 담아줌
+    @PreAuthorize("permitAll()")
+    @ResponseBody
+    @GetMapping("/auth")
+    public Authentication getAuthentication() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+
+        return authentication;
+    }
+}
