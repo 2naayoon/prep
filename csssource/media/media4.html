@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .wrapper {
+        background-color: #333;
+      }
+      .wrapper a {
+        /* padding : 위아래 14, 좌우 16 글자색 #f2f2f2 */
+        padding: 14px 16px;
+        color: #f2f2f2;
+        display: inline-block;
+        /* float: left; */
+        text-decoration: none;
+        text-align: center;
+      }
+      .wrapper a:hover {
+        /* 배경색 #ddd 글자색 검정 */
+        background-color: #ddd;
+        color: black;
+      }
+      /* .clearfix::after {
+        content: "";
+        display: block;
+        clear: both;
+      } */
+
+      /* 0~600px */
+      @media screen and (max-width: 600px) {
+        .wrapper a {
+          /* float: none; */
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper clearfix">
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+    </div>
+  </body>
+</html>

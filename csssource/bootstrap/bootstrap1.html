@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./css/bootstrap.min.css" /> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .container {
+        /* height: 50px; */
+        /* background-color: antiquewhite; */
+        border: 1px solid;
+      }
+      /* .container-fluid {
+        height: 50px;
+        background: crimson;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- 
+        bootstrap : front-end 개발을 도와주는 toolkit
+
+        1. 사용법
+        1) 다운로드
+           *.min.* : 공백 제거해서 원본 파일보다 파일 용량 줄이기
+        2) CDN(Content Delivery Network) 방식 : 서버에 올려놓고 사용하기
+     -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Shop</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">shirts</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 신발 </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">구두</a></li>
+                <li><a class="dropdown-item" href="#">운동화</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">남성화</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <!-- col : 12개 -->
+        <div class="col-8">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nesciunt maxime, molestias accusantium dolorem laboriosam deleniti ipsum
+            suscipit nihil reiciendis atque modi rerum, cum aliquid. Quod consequuntur sequi eveniet repellendus?
+          </p>
+        </div>
+        <div class="col-4">
+          <img src="../image/bg.png" alt="" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">Column</div>
+        <div class="col">Column</div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <img src="https://placehold.co/1280x400" class="img-fluid" alt="..." />
+      <img src="https://placehold.co/200" class="rounded mx-auto d-block" alt="..." />
+    </div>
+
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr class="table-success">
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td class="table-warning">Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container">
+      <!-- m : margin, p : padding,  mb-3 : margin bottom 3  pt-3 : padding top 3
+             mx-3 : margin left, right 
+             my-3 : margin top, bottom
+        -->
+      <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" />
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <!-- <script src="./js/bootstrap.bundle.min.js"></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

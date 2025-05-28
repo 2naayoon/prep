@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 전체 요소 크기 산정 시 border 포함 */
+      * {
+        box-sizing: border-box;
+      }
+      /* body 배경색 #ecf0f1 */
+      body {
+        background-color: #ecf0f1;
+      }
+      /* wrapper max width 60rem width 100%, margin 2rem auto */
+      .wrapper {
+        max-width: 60rem;
+        width: 100%;
+        margin: 2rem auto;
+      }
+
+      /* flexbg flex 컨테이너 설정 */
+      .flexbg {
+        display: flex;
+      }
+      /* 배경색 흰색, width 60%, padding 1.618rem */
+      .flexbg main {
+        background-color: white;
+        width: 60%;
+        padding: 1.618rem;
+        order: 2;
+      }
+      /* sidebar width 20%, padding 1.618rem */
+      .flexbg .sidebar {
+        width: 20%;
+        padding: 1.618rem;
+        color: white;
+      }
+      /* left 배경색 #3498db */
+      .flexbg .left {
+        background-color: #3498db;
+        order: 1;
+      }
+      /* right 배경색 #34495e */
+      .flexbg .right {
+        background-color: #34495e;
+        order: 3;
+      }
+
+      /* 481 ~ 768 */
+      @media screen and (max-width: 768px) {
+        .flexbg {
+          flex-wrap: wrap;
+        }
+        .flexbg main {
+          width: 100%;
+          order: 1;
+        }
+        .flexbg .sidebar {
+          width: 50%;
+        }
+        .flexbg .left {
+          order: 2;
+        }
+      }
+      /* 0 ~ 480 */
+      @media screen and (max-width: 480px) {
+        .flexbg {
+          flex-wrap: wrap;
+        }
+        .flexbg main {
+          width: 100%;
+          order: 1;
+        }
+        .flexbg .sidebar {
+          width: 100%;
+        }
+        .flexbg .left {
+          order: 2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper flexbg">
+      <main>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, a dolor. Rem odit cum nam. Nobis qui ab corporis dolor! In, officia modi.
+          Nobis quisquam vero ea cupiditate esse nisi alias, dolor accusantium placeat, omnis eligendi ipsam vel tenetur labore dignissimos doloribus
+          beatae voluptatum minima minus delectus quasi architecto a? Laudantium tempora ab cum eius rerum sit fugiat aperiam porro. Veniam
+          necessitatibus repudiandae ullam excepturi quo accusantium quos totam? Recusandae possimus suscipit, adipisci sunt maiores ab ipsum magni
+          qui et obcaecati consequatur deleniti repellat, ad quae in facilis error eaque similique perspiciatis ipsa enim omnis cumque. Quis, incidunt
+          perspiciatis. Magnam?
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, a dolor. Rem odit cum nam. Nobis qui ab corporis dolor! In, officia modi.
+          Nobis quisquam vero ea cupiditate esse nisi alias, dolor accusantium placeat, omnis eligendi ipsam vel tenetur labore dignissimos doloribus
+          beatae voluptatum minima minus delectus quasi architecto a? Laudantium tempora ab cum eius rerum sit fugiat aperiam porro. Veniam
+          necessitatibus repudiandae ullam excepturi quo accusantium quos totam? Recusandae possimus suscipit, adipisci sunt maiores ab ipsum magni
+          qui et obcaecati consequatur deleniti repellat, ad quae in facilis error eaque similique perspiciatis ipsa enim omnis cumque. Quis, incidunt
+          perspiciatis. Magnam?
+        </p>
+      </main>
+      <aside class="sidebar left">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, dolores consequatur! Beatae alias recusandae officiis exercitationem
+          voluptatum? Dicta officia, nostrum consequuntur dolorem nobis totam unde voluptas, doloribus harum velit voluptatem.
+        </p>
+      </aside>
+      <aside class="sidebar right">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta iste culpa, dicta ea praesentium quae repellendus quas optio voluptatem
+          mollitia blanditiis officia quasi repudiandae consequuntur modi autem hic non sequi.
+        </p>
+      </aside>
+    </div>
+  </body>
+</html>

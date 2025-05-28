@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* lastest-news : 테두리 2 solid ccc, 너비 350, 높이 145, 바깥 상단 여백 40 */
+      .lastest-news {
+        border: 2px solid #ccc;
+        width: 350px;
+        height: 145px;
+        margin-top: 40px;
+        position: relative;
+      }
+      /* read-more : 배경색 검정, 글자색 흰색, 안쪽 여백 상하0 좌우10, 언더라인 제거, 줄높이 30 */
+      .read-more {
+        background: black;
+        color: white;
+        padding: 0 10px;
+        text-decoration: none;
+        line-height: 30px;
+        position: absolute;
+        right: 0;
+        /* bottom: 155px; */
+        /* calc : 연산 함수 */
+        bottom: calc(100% + 10px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lastest-news">
+      <ul>
+        <li>리스트1</li>
+        <li>리스트2</li>
+        <li>리스트3</li>
+        <li>리스트4</li>
+        <li>리스트5</li>
+      </ul>
+      <a href="#" class="read-more">Read more</a>
+    </div>
+  </body>
+</html>

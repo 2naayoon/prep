@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* margin 중복 */
+      .parent {
+      }
+
+      /* .child {
+        width: 100px;
+        height: 100px; */
+      /* border: 4px solid; */
+      /* background-color: orangered;
+        margin: 20px;
+        float: left;
+      } */
+
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: orangered;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      box model
+      - 요소의 크기 = 요소의 width + padding + border width
+      - width : 100px, padding: 20px, border: 5px
+        → 100 + 40 + 10 = 150px
+        → box-sizing: border-box;  width:100 이 padding, border 를 포함한 크기로 만들어줌
+     -->
+    <!-- 
+        자식 요소의 너비는 부모 요소의 가로 너비에 영향을 받음
+        자식 요소의 내용이 많아지면 부모 크기를 넘어가게 됨 → 부모 크기 안에 제한을 두기 위해
+        max-width, min-width 사용
+
+        마진중복(병합)
+        1. 자식 요소의 margin-bottom과 margin-top 이 겹치는 경우 → 병합하여 한 번만 적용
+
+        마진은 수평으로 쌓일 때는 병합 현상이 안 일어남
+     -->
+    <div class="parent">
+      <div class="child"></div>
+      <div class="child"></div>
+      <div>
+        <div class="box"></div>
+      </div>
+    </div>
+  </body>
+</html>

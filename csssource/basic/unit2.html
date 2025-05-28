@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./reset.css" /> -->
+
+    <style>
+      :root {
+        font-size: 12px;
+      }
+      body {
+        font-size: 16px;
+      }
+      h1 {
+        font-size: 1.5em; /* 16px *1.5 = 24px */
+      }
+      h2 {
+        font-size: 1.2rem; /* 12px *1.2 = 14.4px */
+      }
+      p {
+        /* width: 800px; */
+        font-size: 1rem; /* 12px *1 = 12px */
+        width: 80%;
+      }
+      p span {
+        font-size: 0.8rem;
+      }
+      .box {
+        float: left;
+        margin-right: 20px;
+        background: blue;
+        color: #fff;
+        text-align: center;
+      }
+      .clearfix::after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      .box_px {
+        width: 160px;
+        height: 160px;
+      }
+      .box_em {
+        width: 10em;
+        height: 10em;
+      }
+      .box_rem {
+        width: 10rem;
+        height: 10rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        css단위
+        - 모니터 : px, em, %
+            px : 고정크기
+            % : 상대크기
+            em : em 단위가 쓰여진 곳의 폰트 사이즈 배수
+    -->
+    <h1>CSS 기본 문법</h1>
+    <h2>단위</h2>
+    <p>
+      <span>Lorem, ipsum</span> dolor sit amet consectetur adipisicing elit. A natus alias dolore corrupti minus accusamus. Harum, tempore earum
+      voluptate cumque, nulla animi repellat explicabo eveniet ducimus sequi unde debitis atque eius quam corporis exercitationem! Nemo facilis
+      maiores eligendi illo possimus accusantium alias corrupti, vero amet tempore expedita sit itaque totam!
+    </p>
+
+    <div class="wrapper clearfix">
+      <div class="box box_px">PX</div>
+      <div class="box box_em">EM</div>
+      <div class="box box_rem">REM</div>
+    </div>
+  </body>
+</html>
